@@ -13,7 +13,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class HeroService {
 
-  private heroesUrl = 'api/heroes';
+  // private heroesUrl = 'api/heroes';
+  private heroesUrl = 'https://tour-of-heroes-api.azurewebsites.net/api/hero'; //URL to the web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

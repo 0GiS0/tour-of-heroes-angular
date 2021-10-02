@@ -13,7 +13,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class HeroService {
 
-  private heroesUrl = 'api/heroes';
+  // private heroesUrl = 'api/heroes';
+  private heroesUrl = 'https://localhost:5001/api/hero'; //URL to the web api
+
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

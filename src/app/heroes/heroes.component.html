@@ -20,81 +20,16 @@
 <div id="features-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-4 col-12-medium">
+            <div class="col-4 col-12-medium" *ngFor="let hero of heroes">
                 <!-- Box -->
                 <section class="box feature">
-                    <a href="#" class="image featured"><img src="assets/heroes/captain-america.jpeg" alt="" /></a>
+                    <a routerLink="/detail/{{hero.id}}" class="image featured"><img src="assets/heroes/{{hero.name | lowercase | replace: ' ':'-'}}.jpeg" alt="" /></a>
                     <div class="inner">
                         <header>
-                            <h2>Put something here</h2>
+                            <h2>{{hero.name}}</h2>
                             <p>Maybe here as well I think</p>
                         </header>
-                        <p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
-                    </div>
-                </section>
-            </div>
-            <div class="col-4 col-12-medium">
-                <!-- Box -->
-                <section class="box feature">
-                    <a href="#" class="image featured"><img src="assets/heroes/captain-america.jpeg" alt="" /></a>
-                    <div class="inner">
-                        <header>
-                            <h2>An interesting title</h2>
-                            <p>This is also an interesting subtitle</p>
-                        </header>
-                        <p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
-                    </div>
-                </section>
-            </div>
-            <div class="col-4 col-12-medium">
-                <!-- Box -->
-                <section class="box feature">
-                    <a href="#" class="image featured"><img src="assets/heroes/captain-america.jpeg" alt="" /></a>
-                    <div class="inner">
-                        <header>
-                            <h2>An interesting title</h2>
-                            <p>This is also an interesting subtitle</p>
-                        </header>
-                        <p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
-                    </div>
-                </section>
-            </div>
-            <div class="col-4 col-12-medium">
-                <!-- Box -->
-                <section class="box feature">
-                    <a href="#" class="image featured"><img src="assets/heroes/captain-america.jpeg" alt="" /></a>
-                    <div class="inner">
-                        <header>
-                            <h2>An interesting title</h2>
-                            <p>This is also an interesting subtitle</p>
-                        </header>
-                        <p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
-                    </div>
-                </section>
-            </div>
-            <div class="col-4 col-12-medium">
-                <!-- Box -->
-                <section class="box feature">
-                    <a href="#" class="image featured"><img src="assets/heroes/captain-america.jpeg" alt="" /></a>
-                    <div class="inner">
-                        <header>
-                            <h2>An interesting title</h2>
-                            <p>This is also an interesting subtitle</p>
-                        </header>
-                        <p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
-                    </div>
-                </section>
-            </div>
-            <div class="col-4 col-12-medium">
-                <!-- Box -->
-                <section class="box feature">
-                    <a href="#" class="image featured"><img src="assets/heroes/captain-america.jpeg" alt="" /></a>
-                    <div class="inner">
-                        <header>
-                            <h2>An interesting title</h2>
-                            <p>This is also an interesting subtitle</p>
-                        </header>
-                        <p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
+                        <p>{{hero.description | slice:0:150}}...</p>
                     </div>
                 </section>
             </div>

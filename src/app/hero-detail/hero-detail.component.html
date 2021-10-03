@@ -1,9 +1,30 @@
-<div *ngIf="hero">
+<!-- <div *ngIf="hero">
     <h2>{{hero.name | uppercase}} Details</h2>
     <div><span>id: </span>{{hero.id}}</div>
     <div>
         <label for="hero-name">Hero name: </label>
         <input id="hero-name" [(ngModel)]="hero.name" placeholder="name">
+    </div>
+</div> -->
+<div id="features-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-5 col-12-medium" *ngIf="hero">
+                <!-- Box -->
+                <section class="box feature">
+                    <a routerLink="/detail/{{hero.id}}" class="image featured"><img src="assets/alteregos/{{hero.alterEgo | lowercase | replace: ' ':'-'}}.png" alt="" /></a>
+                    <div class="inner">
+                        <header>
+                            <h2>{{hero.alterEgo}}</h2>
+                            <p>{{hero.ocuppation}}</p>
+                        </header>
+                        <p>{{hero.description}}</p>
+
+                        <input id="hero-alterego" [(ngModel)]="hero.alterEgo" placeholder="alterego">
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
 </div>
 <button (click)="goBack()">go back</button>

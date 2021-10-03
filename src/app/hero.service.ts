@@ -14,7 +14,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class HeroService {
 
   // private heroesUrl = 'api/heroes';
-  private heroesUrl = 'https://tour-of-heroes-webapi.azurewebsites.net/api/hero'; //URL to the web api
+  private heroesUrl = 'https://localhost:5001/api/hero';
+  // private heroesUrl = 'https://tour-of-heroes-webapi.azurewebsites.net/api/hero'; //URL to the web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -68,7 +69,7 @@ export class HeroService {
 
   /** DELETE: delete the hero from the server */
   deleteHero(id: number): Observable<Hero> {
-    const url = `${this.heroesUrl}${id}`;
+    const url = `${this.heroesUrl}/${id}`;
 
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
       tap(_ => this.log(`delete hero id=${id}`)),

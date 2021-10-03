@@ -16,11 +16,9 @@
                     <div class="inner">
                         <header>
                             <h2>{{hero.alterEgo}}</h2>
-                            <p>{{hero.ocuppation}}</p>
+                            <p>{{hero.ocuppation || "Occupation unknown"}}</p>
                         </header>
                         <p>{{hero.description}}</p>
-
-                        <input id="hero-alterego" [(ngModel)]="hero.alterEgo" placeholder="alterego">
                     </div>
                 </section>
             </div>
@@ -28,4 +26,4 @@
     </div>
 </div>
 <button (click)="goBack()">go back</button>
-<button (click)="save()">save</button>
+<!-- <button (click)="save()">save</button> -->

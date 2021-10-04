@@ -14,8 +14,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class HeroService {
 
   // private heroesUrl = 'api/heroes';
-  private heroesUrl = 'https://localhost:5001/api/hero';
-  // private heroesUrl = 'https://tour-of-heroes-webapi.azurewebsites.net/api/hero'; //URL to the web api
+  // private heroesUrl = 'https://localhost:5001/api/hero';
+  private heroesUrl = 'https://tour-of-heroes-webapi.azurewebsites.net/api/hero'; //URL to the web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -53,7 +53,11 @@ export class HeroService {
 
   /** PUT: update the hero on the server */
   updateHero(hero: Hero): Observable<any> {
-    return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
+
+    // Create the route - getting 405 Method not allowed errors
+    const url = `${this.heroesUrl}/${hero.id}`;
+
+    return this.http.put(url, hero, this.httpOptions).pipe(
       tap(_ => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>('updateHero'))
     );

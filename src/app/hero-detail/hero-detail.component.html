@@ -21,9 +21,14 @@
                         <p>{{hero.description}}</p>
                     </div>
                 </section>
+                <div>
+                    <input id="hero-name" [(ngModel)]="hero.name" placeholder="name">
+
+                </div>
             </div>
         </div>
+
     </div>
 </div>
 <button (click)="goBack()">go back</button>
-<!-- <button (click)="save()">save</button> -->
+<button (click)="save()">save</button>

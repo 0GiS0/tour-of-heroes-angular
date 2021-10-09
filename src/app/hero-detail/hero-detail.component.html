@@ -12,7 +12,8 @@
             <div class="col-5 col-12-medium">
                 <!-- Box -->
                 <section class="box feature">
-                    <a routerLink="/detail/{{hero.id}}" class="image featured"><img src="assets/alteregos/{{hero.alterEgo | lowercase | replace: ' ':'-'}}.png" alt="" /></a>
+                    <!-- <a routerLink="/detail/{{hero.id}}" class="image featured"><img src="assets/alteregos/{{hero.alterEgo | lowercase | replace: ' ':'-'}}.png" alt="" /></a> -->
+                    <a routerLink="/detail/{{hero.id}}" class="image featured"><img src="{{alterEgoPic}}" alt="" /></a>
                     <div class="inner">
                         <header>
                             <h2>{{hero.alterEgo}}</h2>

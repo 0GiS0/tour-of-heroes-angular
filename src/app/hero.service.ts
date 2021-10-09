@@ -15,7 +15,8 @@ export class HeroService {
 
   // private heroesUrl = 'api/heroes';
   // private heroesUrl = 'https://localhost:5001/api/hero';
-  private heroesUrl = 'https://tour-of-heroes-webapi.azurewebsites.net/api/hero'; //URL to the web api
+  // private heroesUrl = 'https://tour-of-heroes-webapi.azurewebsites.net/api/hero'; //URL to the web api
+  private heroesUrl = 'https://tour-of-heroes-webapi-azure-storage.azurewebsites.net/api/hero';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,6 +26,10 @@ export class HeroService {
 
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
+  }
+
+  getAlterEgoPic(id: number): Observable<Blob> {
+    return this.http.get(`${this.heroesUrl}/alteregopic/${id}`, { responseType: 'blob' });
   }
 
   getHeroes(): Observable<Hero[]> {

@@ -8,8 +8,8 @@
 </div> -->
 <div id="features-wrapper">
     <div class="container">
-        <div class="row">
-            <div class="col-5 col-12-medium" *ngIf="hero">
+        <div class="row" *ngIf="hero">
+            <div class="col-5 col-12-medium">
                 <!-- Box -->
                 <section class="box feature">
                     <a routerLink="/detail/{{hero.id}}" class="image featured"><img src="assets/alteregos/{{hero.alterEgo | lowercase | replace: ' ':'-'}}.png" alt="" /></a>
@@ -21,10 +21,12 @@
                         <p>{{hero.description}}</p>
                     </div>
                 </section>
-                <div>
-                    <input id="hero-name" [(ngModel)]="hero.name" placeholder="name">
-
-                </div>
+            </div>
+            <div class="col-5">
+                <label for="hero-name">Hero name: </label>
+                <input id="hero-name" [(ngModel)]="hero.name" placeholder="name">
+                <label for="hero-name">Alter ego: </label>
+                <input id="hero-name" [(ngModel)]="hero.alterEgo" placeholder="alterEgo">
             </div>
         </div>
 

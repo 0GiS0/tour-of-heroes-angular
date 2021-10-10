@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 // import { InMemoryDataService } from './in-memory-data.service';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { ReplacePipe } from './replace.pipe';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ReplacePipe } from './replace.pipe';
     MessagesComponent,
     DashboardComponent,
     HeroSearchComponent,
-    ReplacePipe //A pipe for replace characters
+    ReplacePipe,
+    FileUploadComponent //A pipe for replace characters
   ],
   imports: [
     BrowserModule,

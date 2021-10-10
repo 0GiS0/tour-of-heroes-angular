@@ -13,10 +13,11 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class HeroService {
 
+
   // private heroesUrl = 'api/heroes';
-  // private heroesUrl = 'https://localhost:5001/api/hero';
+  private heroesUrl = 'https://localhost:5001/api/hero';
   // private heroesUrl = 'https://tour-of-heroes-webapi.azurewebsites.net/api/hero'; //URL to the web api
-  private heroesUrl = 'https://tour-of-heroes-webapi-azure-storage.azurewebsites.net/api/hero';
+  // private heroesUrl = 'https://tour-of-heroes-webapi-azure-storage.azurewebsites.net/api/hero';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,6 +27,16 @@ export class HeroService {
 
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
+  }
+
+  getSasToken(imageName: string): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+
+    return this.http.get(`${this.heroesUrl}/alteregopic/sas/${imageName}`,
+      { headers: headers, responseType: 'text' })
+      .pipe(
+        tap(_ => this.log('get sas token to upload image')),
+        catchError(this.handleError<Hero[]>('getSasToken', [])));;
   }
 
   getAlterEgoPic(id: number): Observable<Blob> {

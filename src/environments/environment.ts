@@ -5,7 +5,10 @@
 export const environment = {
   production: false,
   containerName: "alteregos",
-  apiUrl: "https://localhost:5001/api/hero"
+  apiUrl: "https://localhost:5001/api/hero",
+  appInsights: {
+    instrumentationKey: "66f63e51-580a-44b7-845b-4ddb1944ec0f"
+  }
 };
 
 /*

@@ -7,6 +7,7 @@ import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { MonitoringService } from './logging.service';
 
 
 @Injectable({
@@ -25,7 +26,7 @@ export class HeroService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  constructor(private messageService: MessageService, private http: HttpClient) { }
+  constructor(private messageService: MessageService, private http: HttpClient, private monitoringService: MonitoringService) { }
 
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
@@ -76,7 +77,10 @@ export class HeroService {
     const url = `${this.heroesUrl}/${hero.id}`;
 
     return this.http.put(url, hero, this.httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${hero.id}`)),
+      tap(_ => {
+        this.log(`updated hero id=${hero.id}`);
+        this.monitoringService.logEvent('updateHero', { "name": hero.name })
+      }),
       catchError(this.handleError<any>('updateHero'))
     );
   }
@@ -84,7 +88,10 @@ export class HeroService {
   /** POST: add a new hero to the server */
   addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
-      tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
+      tap((newHero: Hero) => {
+        this.log(`added hero w/ id=${newHero.id}`);
+        this.monitoringService.logEvent('addHero', { "name": newHero.name });
+      }),
       catchError(this.handleError<Hero>('addHero'))
     );
   }
@@ -94,7 +101,10 @@ export class HeroService {
     const url = `${this.heroesUrl}/${id}`;
 
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`delete hero id=${id}`)),
+      tap(_ => {
+        this.log(`delete hero id=${id}`);
+        this.monitoringService.logEvent('deleteHero', { "id": id });
+      }),
       catchError(this.handleError<Hero>('deleteHero'))
     )
   }

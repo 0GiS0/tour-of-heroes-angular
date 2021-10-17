@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,13 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { ReplacePipe } from './replace.pipe';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 
+//Monitoring with Application Insights
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import { AngularPlugin, ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { MonitoringService } from './logging.service';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +46,34 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     HttpClientModule,
     // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: ErrorHandler,
+      useClass: ApplicationinsightsAngularpluginErrorService
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  // constructor(private router: Router) {
+  //   var angularPlugin = new AngularPlugin();
+
+  //   const appInsights = new ApplicationInsights({
+  //     config: {
+  //       instrumentationKey: environment.appInsights.instrumentationKey,
+  //       extensions: [angularPlugin],
+  //       extensionConfig: {
+  //         [angularPlugin.identifier]: { router: this.router }
+  //       }
+  //     }
+  //   });
+
+  //   appInsights.loadAppInsights();
+
+  // }
+
+  constructor(private monitoringService: MonitoringService) {
+
+  }
+}

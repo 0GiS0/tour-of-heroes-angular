@@ -1,4 +1,4 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -26,6 +26,7 @@ import { AngularPlugin, ApplicationinsightsAngularpluginErrorService } from '@mi
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { MonitoringService } from './logging.service';
+import { MessageService } from './message.service';
 
 
 @NgModule({
@@ -50,6 +51,13 @@ import { MonitoringService } from './logging.service';
     {
       provide: ErrorHandler,
       useClass: ApplicationinsightsAngularpluginErrorService
+    },
+    MessageService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (messageService: MessageService) => () => messageService.initiateSignalrConnection(),
+      deps: [MessageService],
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

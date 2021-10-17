@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class MessageService {
   public initiateSignalrConnection(): Promise<void> {
     return new Promise((resolve, reject) => {
       this.connection = new signalR.HubConnectionBuilder()
-        .withUrl('https://localhost:7238/messaging')
+        .withUrl(environment.signalRUrl)
         .build();
 
       //set methods

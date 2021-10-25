@@ -5,7 +5,11 @@
 export const environment = {
   production: false,
   containerName: "alteregos",
-  apiUrl: "https://localhost:5001/api/hero"
+  apiUrl: "https://localhost:5001/api/hero",
+  eventHub:{
+    endpoint: "https://direct-events.servicebus.windows.net",
+    hubName: "custom-events",
+  }
 };
 
 /*

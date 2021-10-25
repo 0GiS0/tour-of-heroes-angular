@@ -5,8 +5,9 @@ import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { EventsService } from './events.service';
 
 
 @Injectable({
@@ -25,7 +26,8 @@ export class HeroService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  constructor(private messageService: MessageService, private http: HttpClient) { }
+  constructor(private messageService: MessageService, private http: HttpClient, private eventService: EventsService) { }
+  // constructor(private messageService: MessageService, private http: HttpClient) { }
 
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
@@ -64,7 +66,10 @@ export class HeroService {
 
     const url = `${this.heroesUrl}/${id}`;
     return this.http.get<Hero>(url).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
+      tap(_ => {
+        this.log(`fetched hero id=${id}`)
+        this.eventService.sendEvent('getHero', id, _.name);
+      }),
       catchError(this.handleError<Hero>(`getHero id=${id}`))
     );
   }
@@ -76,7 +81,11 @@ export class HeroService {
     const url = `${this.heroesUrl}/${hero.id}`;
 
     return this.http.put(url, hero, this.httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${hero.id}`)),
+      tap(_ => {
+        this.log(`updated hero id=${hero.id}`);
+        this.eventService.sendEvent('updateHero', hero.id, hero.name);
+
+      }),
       catchError(this.handleError<any>('updateHero'))
     );
   }
@@ -84,7 +93,10 @@ export class HeroService {
   /** POST: add a new hero to the server */
   addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
-      tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
+      tap((newHero: Hero) => {
+        this.log(`added hero w/ id=${newHero.id}`);
+        this.eventService.sendEvent('addHero', newHero.id, newHero.name);
+      }),
       catchError(this.handleError<Hero>('addHero'))
     );
   }
@@ -94,7 +106,10 @@ export class HeroService {
     const url = `${this.heroesUrl}/${id}`;
 
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`delete hero id=${id}`)),
+      tap(_ => {
+        this.log(`delete hero id=${id}`);
+        this.eventService.sendEvent('deleteHero', id, _.name);
+      }),
       catchError(this.handleError<Hero>('deleteHero'))
     )
   }

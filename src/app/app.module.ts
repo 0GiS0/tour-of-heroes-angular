@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { ReplacePipe } from './replace.pipe';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { EventsService } from './events.service';
 
 
 @NgModule({
@@ -42,4 +43,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private eventService: EventsService) { }
+
+}

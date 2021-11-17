@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: "https://tour-of-heroes-api-backup.azurewebsites.net/api/hero"
 };

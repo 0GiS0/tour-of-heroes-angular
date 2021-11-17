@@ -6,6 +6,7 @@ import { MessageService } from './message.service';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class HeroService {
 
   // private heroesUrl = 'api/heroes';
-  private heroesUrl = 'https://tour-of-heroes-webapi.azurewebsites.net/api/hero'; //URL to the web api
+  private heroesUrl = environment.apiUrl; //URL to the web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

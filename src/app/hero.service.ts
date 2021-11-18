@@ -15,6 +15,10 @@ import { environment } from 'src/environments/environment';
 export class HeroService {
 
   // private heroesUrl = 'api/heroes';
+  // private heroesUrl = 'https://localhost:5001/api/hero';
+  // private heroesUrl = 'https://tour-of-heroes-webapi.azurewebsites.net/api/hero'; //URL to the web api
+  // private heroesUrl = 'https://tour-of-heroes-webapi-azure-storage.azurewebsites.net/api/hero';
+
   private heroesUrl = environment.apiUrl;
 
   httpOptions = {

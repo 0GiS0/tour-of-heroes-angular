@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Hero } from './hero';
-import { HEROES } from './mock-heroes';
+// import { HEROES } from './mock-heroes';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 
@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
 export class HeroService {
 
   // private heroesUrl = 'api/heroes';
-  private heroesUrl = environment.apiUrl; //URL to the web api
+  private heroesUrl = environment.apiUrl;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,6 +25,20 @@ export class HeroService {
 
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
+  }
+
+  getSasToken(imageName: string): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+
+    return this.http.get(`${this.heroesUrl}/alteregopic/sas/${imageName}`,
+      { headers: headers, responseType: 'text' })
+      .pipe(
+        tap(_ => this.log('get sas token to upload image')),
+        catchError(this.handleError<Hero[]>('getSasToken', [])));;
+  }
+
+  getAlterEgoPic(id: number): Observable<Blob> {
+    return this.http.get(`${this.heroesUrl}/alteregopic/${id}`, { responseType: 'blob' });
   }
 
   getHeroes(): Observable<Hero[]> {
@@ -53,7 +67,11 @@ export class HeroService {
 
   /** PUT: update the hero on the server */
   updateHero(hero: Hero): Observable<any> {
-    return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
+
+    // Create the route - getting 405 Method not allowed errors
+    const url = `${this.heroesUrl}/${hero.id}`;
+
+    return this.http.put(url, hero, this.httpOptions).pipe(
       tap(_ => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>('updateHero'))
     );
@@ -69,7 +87,7 @@ export class HeroService {
 
   /** DELETE: delete the hero from the server */
   deleteHero(id: number): Observable<Hero> {
-    const url = `${this.heroesUrl}${id}`;
+    const url = `${this.heroesUrl}/${id}`;
 
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
       tap(_ => this.log(`delete hero id=${id}`)),

@@ -63,28 +63,85 @@ input {
     border-radius: 4px 0 0 4px;
 }
 
-.add-button {
-    padding: .5rem 1.5rem;
-    font-size: 1rem;
-    margin-bottom: 2rem;
+
+/* Image */
+
+.image {
+    display: inline-block;
+    outline: 0;
 }
 
-.add-button:hover {
-    color: white;
-    background-color: #42545C;
+.image img {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
 }
 
-button.delete {
-    position: absolute;
-    left: 210px;
-    top: 5px;
-    background-color: white;
-    color: #525252;
-    font-size: 1.1rem;
-    padding: 1px 10px 3px 10px;
+.image.fit {
+    display: block;
+    width: 100%;
 }
 
-button.delete:hover {
-    background-color: #525252;
-    color: white;
+.image.featured {
+    display: block;
+    width: 100%;
+    margin: 0 0 2.5em 0;
+}
+
+.image.left {
+    float: left;
+    margin: 0 2em 2em 0;
+}
+
+.image.centered {
+    display: block;
+    margin: 0 0 2.5em 0;
+}
+
+.image.centered img {
+    margin: 0 auto;
+    width: auto;
+}
+
+
+/* Box */
+
+.box {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.05);
+    padding: 2em;
+}
+
+.box.feature {
+    padding: 0;
+}
+
+.box.feature .inner {
+    padding: 4em 2em 3em 2em;
+}
+
+.box.feature h2 {
+    font-size: 1.35em;
+}
+
+.box.feature p {
+    margin: 0;
+}
+
+.box.feature .image {
+    position: relative;
+    margin: 0;
+}
+
+.box.feature .image img {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+
+/* Wrappers */
+
+#features-wrapper {
+    padding: 3em 0 3em 0;
 }

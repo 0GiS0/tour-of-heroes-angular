@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  containerName: "alteregos",
   apiUrl: "https://localhost:5001/api/hero"
 };
 

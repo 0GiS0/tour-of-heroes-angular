@@ -50,26 +50,33 @@ export class FileUploadComponent implements OnInit {
 
   async upload() {
 
+    //Preparamos el nombre de la imagen para que luego sepamos recuperarla
     const finalImageName = `${this.hero.alterEgo.replace(' ', '-').toLowerCase()}${this.imgName.slice(this.imgName.lastIndexOf('.'))}`;
 
     console.log(`final image name: ${finalImageName}`);
 
+    //Recuperamos un token para poder subir la imagen a Azure Storage
     this.heroService.getSasToken(finalImageName).subscribe(async (uriSas) => {
       console.log(`uriSas: ${uriSas}`);
 
+      //Creamos un cliente de blob storage con la URL y el token
       const blobClient = new BlobServiceClient(uriSas);
+      //Recuperamos el contenedor donde se almacenará la imagen
       const containerClient = blobClient.getContainerClient(environment.containerName);
 
       console.log(`Final image name: ${finalImageName}`);
 
+      //Creamos la referencia de donde estará nuestra nueva imagen
       const blobFile = containerClient.getBlockBlobClient(finalImageName);
 
+      //La subimos al contenedor
       await blobFile.uploadData(this.image, {
         concurrency: 20,
         onProgress: (ev) => console.log(ev),
         blobHTTPHeaders: { blobContentType: this.fileType }
       });
 
+      //Avisamos a Angular de que hemos cambiado la imagen, simplemente para que la recargue
       this.messageEvent.emit('newAlterEgoImage');
 
     });

@@ -5,8 +5,8 @@ az
 az login
 
 #Variables
-RESOURCE_GROUP="Lemoncode-Tour-Of-Heroes"
-STORAGE_NAME="picheroes"
+RESOURCE_GROUP="Tour-Of-Heroes"
+STORAGE_NAME="<YOUR_STORAGE_ACCOUNT_NAME>"
 LOCATION="northeurope"
 
 #Crear una cuenta de almacenamiento dentro del grupo de recursos Lemoncode-Tour-Of-Heroes

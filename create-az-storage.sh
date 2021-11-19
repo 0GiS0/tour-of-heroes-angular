@@ -9,8 +9,8 @@ RESOURCE_GROUP="Tour-Of-Heroes"
 STORAGE_NAME="<YOUR_STORAGE_ACCOUNT_NAME>"
 LOCATION="northeurope"
 
-#Crear una cuenta de almacenamiento dentro del grupo de recursos Lemoncode-Tour-Of-Heroes
-az storage account create --resource-group $RESOURCE_GROUP --name $STORAGE_NAME --location $LOCATION --sku Standard_LRS
+#Crear una cuenta de almacenamiento dentro del grupo de recursos Tour-Of-Heroes
+az storage account create --resource-group $RESOURCE_GROUP --name $STORAGE_NAME --location $LOCATION 
 
 #Crear el contenedor de los superheroes
 az storage container create --name heroes --account-name $STORAGE_NAME --public-access blob

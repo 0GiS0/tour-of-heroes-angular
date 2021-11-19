@@ -155,8 +155,6 @@ getHero(): void {
   }
 ```
 
-Este 
-
 ## Cómo lo ejecuto
 
 **IMPORTANTE**: Antes de ejecutar este proyecto necesitas tener la API en .NET ejecutándose. Más información [aquí](https://github.com/0GiS0/tour-of-heroes-dotnet-api) Sin embargo, para esta versión necesitas que sea el branch **azure-storage-pics**. Este debe tener configurado correctamente la cuenta de almacenamiento que has utilizado en esta parte.
@@ -179,7 +177,6 @@ y por último ejecutarlo con start:
 ```
 npm start
 ```
-
 El proceso arrancará y estará disponible en esta dirección: [http://localhost:4200/](http://localhost:4200/)
 
 ## Resultado

@@ -1,27 +1,85 @@
-# AngularTourOfHeroes
+# Aplicación de ejemplo en Angular: Tour Of Heroes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
+En esta versión del proyecto, se crea añade [un nuevo componente de Angular](https://angular.io/tutorial/toh-pt3), llamado file-upload que puedes encontrar en **app/file-upload**. Este es el HTML del componente:
 
-## Development server
+```
+<div class="file-upload-wrapper">
+    <label class="custom-file-upload">
+        <input type="file" (change)="onImageChange($event)" />
+        Change image
+    </label>
+    <button [disabled]="imgName == '' ? true : null" (click)="upload()">Apply image</button>
+</div>
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Lo que nos va a permitir es que podamos subir una imagen nueva para nuestros alter egos y que esta se actualice en la página.
 
-## Code scaffolding
+Este componente tiene un TypeScript que hace lo siguiente:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+  async upload() {
 
-## Build
+    //Preparamos el nombre de la imagen para que luego sepamos recuperarla
+    const finalImageName = `${this.hero.alterEgo.replace(' ', '-').toLowerCase()}${this.imgName.slice(this.imgName.lastIndexOf('.'))}`;
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+    console.log(`final image name: ${finalImageName}`);
 
-## Running unit tests
+    //Recuperamos un token para poder subir la imagen a Azure Storage
+    this.heroService.getSasToken(finalImageName).subscribe(async (uriSas) => {
+      console.log(`uriSas: ${uriSas}`);
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+      //Creamos un cliente de blob storage con la URL y el token
+      const blobClient = new BlobServiceClient(uriSas);
+      //Recuperamos el contenedor donde se almacenará la imagen
+      const containerClient = blobClient.getContainerClient(environment.containerName);
 
-## Running end-to-end tests
+      console.log(`Final image name: ${finalImageName}`);
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+      //Creamos la referencia de donde estará nuestra nueva imagen
+      const blobFile = containerClient.getBlockBlobClient(finalImageName);
 
-## Further help
+      //La subimos al contenedor
+      await blobFile.uploadData(this.image, {
+        concurrency: 20,
+        onProgress: (ev) => console.log(ev),
+        blobHTTPHeaders: { blobContentType: this.fileType }
+      });
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+      //Avisamos a Angular de que hemos cambiado la imagen, simplemente para que la recargue
+      this.messageEvent.emit('newAlterEgoImage');
+
+    });
+```
+
+Esta función llama a nuestra API para recuperar el SAS para poder subir la imagen (si no daría un 403). La última linea del código emite un evento para que el componente padre sepa que hemos cambiado la imagen y simplemente haga una nueva llamada para recargarla.
+
+## Cómo lo ejecuto
+
+**IMPORTANTE**: Antes de ejecutar este proyecto necesitas tener la API en .NET ejecutándose. Más información [aquí](https://github.com/0GiS0/tour-of-heroes-dotnet-api) Sin embargo, para esta versión necesitas que sea el branch **azure-storage-pics**. Este debe tener configurado correctamente la cuenta de almacenamiento que has utilizado en esta parte.
+
+Lo primero que debes hacer es descargarte el proyecto en local y apuntar al branch az-storage-from-js:
+
+```
+git clone https://github.com/0GiS0/tour-of-heroes-dotnet-api.git
+git checkout az-storage-from-js
+```
+
+Instalar las dependencias con npm (si habías ejecutado otros branches anteriormente, procura eliminar la carpeta node_modules si te da problemas):
+
+```
+npm install
+```
+
+y por último ejecutarlo con start:
+
+```
+npm start
+```
+
+El proceso arrancará y estará disponible en esta dirección: [http://localhost:4200/](http://localhost:4200/)
+
+## Resultado
+
+El resultado de esta mejora es la siguiente:
+
+![Resultado de az-storage-from-js](images/az-storage-from-js%20resultado.png)

@@ -1,27 +1,73 @@
-# AngularTourOfHeroes
+# Aplicación de ejemplo en Angular: Tour Of Heroes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
+Este proyecto es una aplicación en AngularJS que muestra un listado de heroes. Proviene del [tutorial de AngularJS](https://angular.io/tutorial). Sin embargo, se han llevado a cabo ciertas modificaciones para que este utilice una API en .NET Core que puedes encontrar [aquí](https://github.com/0GiS0/tour-of-heroes-dotnet-api).
 
-## Development server
+Para ello, se ha modificado el archivo **app/app.module.ts** para comentar los archivos que referencian a la API en memoria del tutorial.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+//In memory web api
+// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { InMemoryDataService } from './in-memory-data.service';
+```
+Y el que se referencia en el apartado imports:
 
-## Code scaffolding
+```
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false })
+  ],
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Por otro lado, se ha modificado el archivo **app/hero.service.ts** para utilizar una variable que referencie a la API real:
 
-## Build
+```
+export class HeroService {
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+  // private heroesUrl = 'api/heroes';
+  private heroesUrl = environment.apiUrl; //URL to the web api
+```
 
-## Running unit tests
+Los valores de enviroment se encuentran en los archivos **src/environments/enviroment.ts** y **src/environments/environment.prod.ts**. Dependiendo de cómo se compile el proyecto se utilizará uno u otro (environment.ts para desarrollo y environment.prod.ts para producción).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+y un cambio mínimo en el método update:
 
-## Running end-to-end tests
+```
+  /** PUT: update the hero on the server */
+  updateHero(hero: Hero): Observable<any> {
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    // Create the route - getting 405 Method not allowed errors
+    const url = `${this.heroesUrl}/${hero.id}`;
 
-## Further help
+    return this.http.put(url, hero, this.httpOptions).pipe(
+      tap(_ => this.log(`updated hero id=${hero.id}`)),
+      catchError(this.handleError<any>('updateHero'))
+    );
+  }
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Cómo lo ejecuto
+
+**IMPORTANTE**: Antes de ejecutar este proyecto necesitas tener la API en .NET ejecutándose. Más información [aquí](https://github.com/0GiS0/tour-of-heroes-dotnet-api)
+
+Lo primero que debes hacer es descargarte el proyecto en local:
+
+```
+git clone https://github.com/0GiS0/tour-of-heroes-dotnet-api.git
+```
+
+Instalar las dependencias con npm:
+
+```
+npm install
+```
+
+y por último ejecutarlo con start:
+
+```
+npm start
+```
+
+El proceso arrancará y estará disponible en esta dirección: [http://localhost:4200/](http://localhost:4200/)

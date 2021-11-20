@@ -7,9 +7,9 @@ export const environment = {
   containerName: "alteregos",
   apiUrl: "https://localhost:5001/api/hero",
   appInsights: {
-    instrumentationKey: "fc6cc83d-f53e-4180-aac8-794f64eed452"
+    instrumentationKey: "<INTRUMENTATION_KEY>"
   },
-  storageUrl: "https://picheroes.blob.core.windows.net"
+  storageUrl: "https://lemonheroes.blob.core.windows.net"
 };
 
 /*

@@ -9,6 +9,7 @@ export const environment = {
   appInsights: {
     instrumentationKey: "<INSTRUMENTATION_KEY>"
   },
+  storageUrl: "http://127.0.0.1:10000/devstoreaccount1",
   signalRUrl: "https://localhost:7238/messaging"
 };
 

@@ -27,8 +27,11 @@ az storage blob upload-batch --destination alteregos --source src/assets/altereg
 #Azurite is a free, open source, cross-platform, cloud-based development environment for building, testing, and deploying applications.
 npm install -g azurite
 
-#Start azurite
+#Start azurite (Windows)
 azurite --location c:\azurite --loose
+
+#Start azurite (Windows)
+azurite --location "$HOME/azurite" --loose
 
 #Connection string for azurite
 AZURITE_CONNECTION_STRING="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;"

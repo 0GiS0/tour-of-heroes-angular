@@ -31,7 +31,7 @@ npm install -g azurite
 azurite --location c:\azurite --loose
 
 #Connection string for azurite
-$AZURITE_CONNECTION_STRING="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;"
+AZURITE_CONNECTION_STRING="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;"
 
 #Create containers
 az storage container create -n heroes --public-access blob --connection-string $AZURITE_CONNECTION_STRING
@@ -41,5 +41,5 @@ az storage container create -n alteregos --connection-string $AZURITE_CONNECTION
 az storage blob upload-batch --destination alteregos --source src/assets/alteregos/. --connection-string $AZURITE_CONNECTION_STRING
 
 #Configure CORS settings
-az storage cors add --origin 'http://localhost:4200' --methods OPTIONS, PUT --services b --connection-string $AZURITE_CONNECTION_STRING
+az storage cors add --origin 'http://localhost:4200' --methods 'OPTIONS' 'PUT' --services b --connection-string $AZURITE_CONNECTION_STRING
 

@@ -15,4 +15,5 @@ En esta versión del proyecto basado en el tutorial de AngularJS se modifica el 
 
 Gracias a esta Logic App:
 
-![Azure Logic App](images/tour-of-heroes-logic-app.png)
+<img src="images/tour-of-heroes-logic-app.png" alt="logic-app" style="width:400px;"/>
+

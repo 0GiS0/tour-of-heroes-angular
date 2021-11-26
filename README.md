@@ -1,27 +1,74 @@
-# AngularTourOfHeroes
+# Aplicación de ejemplo en Angular: Tour Of Heroes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
+En esta versión del proyecto hemos instrumentalizado el mismo con Application Insights. Para ello hemos instalado dos nuevos paquetes:
 
-## Development server
+```
+npm install @microsoft/applicationinsights-web @microsoft/applicationinsights-angularplugin-js
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Cambios
 
-## Code scaffolding
+Para poder hacer uso de estas librerías se ha modificado el archivo ***src/app/app.module.ts*** donde en el constructor se ha inyectado una nueva clase llamada ***MonitoringService***:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+constructor(private monitoringService: MonitoringService) {
 
-## Build
+}
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+y se ha implementado esta de la siguiente manera:
 
-## Running unit tests
+````
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { AngularPlugin } from '@microsoft/applicationinsights-angularplugin-js';
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import { environment } from 'src/environments/environment';
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@Injectable(
+    { providedIn: 'root' }
+)
+export class MonitoringService {
+    appInsights: ApplicationInsights;
+    angularPlugin: AngularPlugin;
 
-## Running end-to-end tests
+    constructor(private router: Router) {
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+        this.angularPlugin = new AngularPlugin();
 
-## Further help
+        this.appInsights = new ApplicationInsights({
+            config: {
+                instrumentationKey: environment.appInsights.instrumentationKey,                
+                extensions: [this.angularPlugin],
+                extensionConfig: {
+                    [this.angularPlugin.identifier]: { router: this.router }
+                }
+            }
+        });
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+        this.appInsights.loadAppInsights();
+    }
+
+    logEvent(name: string, properties?: { [key: string]: any }) {
+        this.appInsights.trackEvent({ name: name }, properties);
+    }
+
+    logMetric(name: string, average: number, properties?: { [key: string]: any }) {
+        this.appInsights.trackMetric({ name: name, average: average }, properties);
+    }
+
+    logException(exception: Error, severityLevel?: number) {
+        this.appInsights.trackException({ exception: exception, severityLevel: severityLevel });
+    }
+
+    logTrace(message: string, properties?: { [key: string]: any }) {
+        this.appInsights.trackTrace({ message: message }, properties);
+    }
+}
+````
+
+***Nota***: como se puede ver en esta, es necesario guardar en el archivo ***environments/environment.ts*** el valor de la instrumentation key del servicio que podemos crear usando este comando:
+
+```
+az monitor app-insights component create --app angular-tour-of-heroes --location northeurope -g Lemoncode-Tour-Of-Heroes
+```

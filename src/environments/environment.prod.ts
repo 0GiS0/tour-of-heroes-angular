@@ -6,5 +6,6 @@ export const environment = {
     instrumentationKey: "66f63e51-580a-44b7-845b-4ddb1944ec0f"
   },
   storageUrl: "https://lemonheroes.blob.core.windows.net",
-  signalRUrl: "https://signalrmessagingtourofheroes.azurewebsites.net/messaging"
+  signalRUrl: "https://signalrmessagingtourofheroes.azurewebsites.net/messaging",
+  WebPubSubConnectionString: "Endpoint=https://tour-of-heroes.webpubsub.azure.com;AccessKey=pHTHjTqe6KgyGlw/fDXAAAsofjOyz/UX+eEFoxsDKC4=;Version=1.0;"
 };

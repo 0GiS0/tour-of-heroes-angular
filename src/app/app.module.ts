@@ -13,18 +13,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
-//In memory web api
-// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-// import { InMemoryDataService } from './in-memory-data.service';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { ReplacePipe } from './replace.pipe';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 
 //Monitoring with Application Insights
-import { ApplicationInsights } from '@microsoft/applicationinsights-web';
-import { AngularPlugin, ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
-import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { ApplicationinsightsAngularpluginErrorService } from '@microsoft/applicationinsights-angularplugin-js';
 import { MonitoringService } from './logging.service';
 import { MessageService } from './message.service';
 
@@ -45,7 +39,6 @@ import { MessageService } from './message.service';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false })
   ],
   providers: [
     {
@@ -55,7 +48,7 @@ import { MessageService } from './message.service';
     MessageService,
     {
       provide: APP_INITIALIZER,
-      useFactory: (messageService: MessageService) => () => messageService.initiateSignalrConnection(),
+      useFactory: (messageService: MessageService) => () => messageService.initiateAzWebPubSubConnection(),
       deps: [MessageService],
       multi: true
     }
@@ -63,23 +56,6 @@ import { MessageService } from './message.service';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
-  // constructor(private router: Router) {
-  //   var angularPlugin = new AngularPlugin();
-
-  //   const appInsights = new ApplicationInsights({
-  //     config: {
-  //       instrumentationKey: environment.appInsights.instrumentationKey,
-  //       extensions: [angularPlugin],
-  //       extensionConfig: {
-  //         [angularPlugin.identifier]: { router: this.router }
-  //       }
-  //     }
-  //   });
-
-  //   appInsights.loadAppInsights();
-
-  // }
 
   constructor(private monitoringService: MonitoringService) {
 

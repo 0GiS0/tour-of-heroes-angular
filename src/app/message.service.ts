@@ -1,49 +1,60 @@
 import { Injectable } from '@angular/core';
-import * as signalR from '@microsoft/signalr';
-import { environment } from 'src/environments/environment';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
 
-  connection?: signalR.HubConnection;
+  ws?: WebSocket;
   messages: string[] = [];
 
-  public initiateSignalrConnection(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.connection = new signalR.HubConnectionBuilder()
-        .withUrl(environment.signalRUrl)
-        .build();
+  public initiateAzWebPubSubConnection(): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      let res = await fetch('http://localhost:7071/api/negotiate');
+      let url = await res.json();
+      console.log(`url: ${url.url}`);
+      this.ws = new WebSocket(url.url);
 
-      //set methods
+      this.ws.onopen = () => console.log('connected');
+
+      this.ws.onclose = e => console.log(`connection closed (${e.code})`);
+
+      this.ws.onerror = e => console.log(e);
+
       this.receiveMessage();
 
-      this.connection.start().then(() => {
-        console.log(`SignalR connection success! connectionId: ${this.connection!.connectionId}`);
-        resolve();
-      }).catch(err => {
-        console.log(`SignalR connection error: ${err}`);
-        reject(err);
-      });
+      resolve();
+
     });
   }
 
 
   add(message: string) {
-    // this.messages.push(message);
-    this.connection!.invoke('Send', message);
+    if (this.ws?.readyState === WebSocket.OPEN) {
+      console.log(`Sending message: ${message}`);
+
+      this.ws!.send(JSON.stringify(
+        {
+          from: 'me',
+          content: message,
+        }
+      ));
+
+
+      // this.ws!.send(message);
+    }
   }
 
   receiveMessage() {
-    this.connection!.on('Send', (message, important) => {
+    this.ws!.onmessage = (e) => {
 
-      console.log(`Received message: ${message}`);
-      console.log(`Received important: ${important}`);
+      if (!e.data) return;
 
-      this.messages.push(message);
-    });
+      console.log(`Received message: ${e.data}`);
+      var server_message = e.data;
+      console.log(server_message);
+      this.messages.push(server_message);
+    }
   }
 
   clear() {

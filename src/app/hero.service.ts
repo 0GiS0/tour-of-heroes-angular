@@ -32,7 +32,7 @@ export class HeroService {
     // this.messageService.add('HeroService: fetched heroes')
     // return heroes;
 
-    return this.http.get<Hero[]>(`${this.heroesUrl}/getheroes`)
+    return this.http.get<Hero[]>(`${this.heroesUrl}/GetHeroes`)
       .pipe(
         tap(_ => this.log('fetched heroes')),
         catchError(this.handleError<Hero[]>('getHeroes', [])));

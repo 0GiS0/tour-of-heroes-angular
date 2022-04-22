@@ -32,7 +32,8 @@ export class HeroService {
     // this.messageService.add('HeroService: fetched heroes')
     // return heroes;
 
-    return this.http.get<Hero[]>(this.heroesUrl)
+    // return this.http.get<Hero[]>(this.heroesUrl)
+    return this.http.get<Hero[]>(`${this.heroesUrl}/GetHeroes`)
       .pipe(
         tap(_ => this.log('fetched heroes')),
         catchError(this.handleError<Hero[]>('getHeroes', [])));
@@ -44,7 +45,8 @@ export class HeroService {
     // this.messageService.add(`HeroService: fetched hero id=${id}`);
     // return of(hero);
 
-    const url = `${this.heroesUrl}/${id}`;
+    // const url = `${this.heroesUrl}/${id}`;
+    const url = `${this.heroesUrl}/GetHeroById?id=${id}`;
     return this.http.get<Hero>(url).pipe(
       tap(_ => this.log(`fetched hero id=${id}`)),
       catchError(this.handleError<Hero>(`getHero id=${id}`))

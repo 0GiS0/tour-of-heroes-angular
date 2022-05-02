@@ -1,0 +1,27 @@
+name: GitHub Packages demo
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:   
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login GitHub Packages
+        uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Short the sha to 7 characters only
+        id: vars
+        run: echo ::set-output name=tag::$(echo ${GITHUB_SHA::7})
+      - uses: docker/build-push-action@v2
+        with:         
+          context: .         
+          push: true
+          tags: docker.pkg.github.com/0gis0/tour-of-heroes/tour-of-heroes:${{ steps.vars.outputs.tag }}

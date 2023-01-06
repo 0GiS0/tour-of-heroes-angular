@@ -14,6 +14,8 @@ RUN npm run build --prod
 
 FROM nginx:stable
 
+COPY --from=build-step /app/dist/angular-tour-of-heroes /usr/share/nginx/html
+
 ########### Openshift #################
 # support running as arbitrary user which belogs to the root group
 RUN chmod g+rwx /var/cache/nginx /var/run /var/log/nginx /usr/share/nginx/html/assets
@@ -24,7 +26,6 @@ EXPOSE 8081
 RUN sed -i.bak 's/^user/#user/' /etc/nginx/nginx.conf
 #######################################
 
-COPY --from=build-step /app/dist/angular-tour-of-heroes /usr/share/nginx/html
 
 # When the container starts, replace the env.js with values from environment variables
 CMD ["/bin/sh",  "-c",  "envsubst < /usr/share/nginx/html/assets/env.sample.js > /usr/share/nginx/html/assets/env.js && exec nginx -g 'daemon off;'"]

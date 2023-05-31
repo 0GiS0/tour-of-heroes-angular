@@ -59,6 +59,10 @@ jobs:
     # If this step fails, then you should remove it and run the build manually (see below)
     #- name: Autobuild
     #  uses: github/codeql-action/autobuild@v2
+    - name: Install latest Angular CLI
+      run: npm install -g @angular/cli
+    - name: Install dependencies
+      run: npm install
     - name: Compile TypeScript
       run: npm run build --prod
 

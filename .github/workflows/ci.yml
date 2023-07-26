@@ -1,0 +1,13 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  # Confirm that prettier was run on the changes
+  prettier:
+    uses: 0GiS0/tour-of-heroes-angular/.github/workflows/prettier-ci.yml@main
+  # Make sure eslint passes
+  eslint:
+    uses: 0GiS0/tour-of-heroes-angular/.github/workflows/eslint-ci.yml@main

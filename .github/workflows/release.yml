@@ -1,6 +1,3 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: Generate Angular release
 
 on:
@@ -22,7 +19,7 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - name: Zip dist
-        run: zip -r dist.zip dist/angular-tour-of-heroes/*      
+        run: cd dist/angular-tour-of-heroes ; zip -r ../../dist.zip . * ; cd ../../
       - name: Check package version
         uses: technote-space/package-version-check-action@v1
       - name: Build changelog

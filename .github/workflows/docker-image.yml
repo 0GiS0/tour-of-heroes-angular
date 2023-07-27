@@ -24,4 +24,4 @@ jobs:
         with:         
           context: .         
           push: true
-          tags: docker.pkg.github.com/0gis0/tour-of-heroes/tour-of-heroes:${{ steps.vars.outputs.tag }}
+          tags: docker.pkg.github.com/0gis0/tour-of-heroes-angular/tour-of-heroes-angular:${{ steps.vars.outputs.tag }}

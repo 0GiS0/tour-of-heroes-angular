@@ -22,8 +22,7 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - name: Zip dist
-        run: zip -r dist.zip dist/angular-tour-of-heroes/.
-      # Update version in package.json according to the tag
+        run: zip -r dist.zip dist/angular-tour-of-heroes/.      
       - name: Check package version
         uses: technote-space/package-version-check-action@v1
       - name: Build changelog

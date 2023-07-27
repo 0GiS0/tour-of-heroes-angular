@@ -1,6 +1,6 @@
 {
   "name": "tour-of-heroes-angular",
-  "version": "0.0.0",
+  "version": "1.1.4",
   "scripts": {
     "ng": "export NODE_OPTIONS=--openssl-legacy-provider ng",
     "start": "export NODE_OPTIONS=--openssl-legacy-provider && ng serve",

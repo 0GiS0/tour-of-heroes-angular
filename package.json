@@ -6,7 +6,8 @@
     "start": "export NODE_OPTIONS=--openssl-legacy-provider && ng serve",
     "build": "export NODE_OPTIONS=--openssl-legacy-provider && ng build",
     "watch": "export NODE_OPTIONS=--openssl-legacy-provider && ng build --watch --configuration development",
-    "test": "export NODE_OPTIONS=--openssl-legacy-provider && ng test"
+    "test": "export NODE_OPTIONS=--openssl-legacy-provider && ng test",
+    "prettier-check": "prettier --check \"./**/*.{md,jsx,json,html,css,js,yml,ts,tsx}\""
   },
   "private": true,
   "dependencies": {
@@ -35,6 +36,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "prettier-check": "^2.0.0",
     "typescript": "~4.6.4"
   }
 }

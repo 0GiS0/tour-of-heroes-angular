@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   // apiUrl: 'http://localhost:30040/api/hero'
-  apiUrl: window['env']['ApiUrl'] || 'http://localhost:5000/api/hero'
+  apiUrl: window['env']['ApiUrl'] || 'http://localhost:5000/api/hero',
 };

@@ -17,5 +17,7 @@ jobs:
       - uses: actions/setup-node@v2.5.2
         with:
           node-version: ${{ env.NODE_VERSION }}
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
       - name: Run ESLint
         run: npm run lint

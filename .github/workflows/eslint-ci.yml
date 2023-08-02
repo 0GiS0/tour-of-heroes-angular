@@ -20,4 +20,6 @@ jobs:
       - name: Install Angular CLI
         run: npm install -g @angular/cli
       - name: Run ESLint
-        run: npm run lint
+        run: |
+          npm install         
+          npm run lint

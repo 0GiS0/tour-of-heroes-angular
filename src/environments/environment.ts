@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   //apiUrl: 'http://localhost:5010/api/hero'
   apiUrl: window['env']['ApiUrl'] || 'http://localhost:5000/api/hero',
-  // apiUrl: 'https://tour-of-heroes-functions.azurewebsites.net/api'
+  // apiUrl: 'https://tour-of-heroes-functions.azurewebsites.net/api',
+  AzureAD_Secret: '4eu8Q~0RdJ3Sefho32hSQlvEHIYG9FTAkjPwqcAr'
 };
 
 /*

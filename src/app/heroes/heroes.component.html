@@ -11,7 +11,9 @@
 <ul class="heroes">
   <li *ngFor="let hero of heroes">
     <a routerLink="/detail/{{ hero.id }}">
-      <span class="badge">{{ hero.id }}</span> {{ hero.name }} <!-- Interpolated content is always escaped --> </a>
+      <span class="badge">{{ hero.id }}</span> {{ hero.name }}
+      <!-- Interpolated content is always escaped -->
+    </a>
 
     <button class="delete" title="delete hero" (click)="delete(hero)">x</button>
   </li>

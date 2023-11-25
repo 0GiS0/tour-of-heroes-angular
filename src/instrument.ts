@@ -7,7 +7,7 @@ import {
 } from '@opentelemetry/sdk-trace-web';
 import { getWebAutoInstrumentations } from '@opentelemetry/auto-instrumentations-web';
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
-import { ZoneContextManager } from '@opentelemetry/context-zone';
+// import { ZoneContextManager } from '@opentelemetry/context-zone';
 
 const provider = new WebTracerProvider();
 // For demo purposes only, immediately log traces to the console
@@ -22,7 +22,7 @@ provider.addSpanProcessor(
 );
 
 provider.register({
-  contextManager: new ZoneContextManager(),
+  // contextManager: new ZoneContextManager(),
 });
 
 registerInstrumentations({

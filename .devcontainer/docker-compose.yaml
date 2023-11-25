@@ -1,0 +1,45 @@
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+
+    volumes:
+      - ../..:/workspaces:cached
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+  api:
+    image: ghcr.io/0gis0/tour-of-heroes-dotnet-api/tour-of-heroes-api:6b947c4
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Database=heroes;User Id=sa;Password=P@ssword;
+      - OTLP_ENDPOINT_URL=http://jaeger:4317
+    ports:
+      - "5010:80"
+  db:
+    # image: mcr.microsoft.com/mssql/server:latest
+    image:  mcr.microsoft.com/azure-sql-edge
+    restart: unless-stopped
+    environment:
+      SA_PASSWORD: P@ssword
+      ACCEPT_EULA: Y
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "4317:4317"
+      - "16686:16686"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "14268:14268"
+      - "14250:14250"
+      - "9411:9411"
+
+    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+
+    # Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    # user: root
+
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
+    # (Adding the "ports" property to this file will not forward from a Codespace.)

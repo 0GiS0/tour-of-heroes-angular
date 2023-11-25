@@ -7,5 +7,23 @@
 	"remoteUser": "node",
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/angular-cli:2": {}
-	}
+	},
+	"forwardPorts": [
+		16686,
+		4200,
+		5010,
+		4317
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"GitHub.copilot",
+				"dbaeumer.vscode-eslint",
+				"DavidAnson.vscode-markdownlint",
+				"eamodio.gitlens"
+			]
+		}
+	},
+	"postCreateCommand": "npm install && npm run build && npm run start"
 }

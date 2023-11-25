@@ -1,23 +1,29 @@
 version: '3.7'
 services:
-  app:
+  workspace:
     build: 
       context: .
       dockerfile: Dockerfile
-
     volumes:
       - ../..:/workspaces:cached
-
     # Overrides default command so things don't shut down after the process ends.
+    environment:
+      OTEL_SERVICE_NAME: tour-of-heroes-angular
     command: sleep infinity
     networks:
       - observability
+  web:
+    image: ghcr.io/0gis0/tour-of-heroes-angular:main
+    ports:
+      - "8080:80"
+    networks:
+      - observability    
   api:
     image: ghcr.io/0gis0/tour-of-heroes-dotnet-api/tour-of-heroes-api:6b947c4
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db,1433;Initial Catalog=heroes;Persist Security Info=False;User ID=sa;Password=P@ssword;TrustServerCertificate=True;
-      - OTLP_ENDPOINT_URL=http://jaeger:4318
+      - OTLP_ENDPOINT_URL=http://jaeger:4317
     ports:
       - "5010:5000"
     depends_on:
@@ -25,7 +31,6 @@ services:
     networks:
       - observability
   db:
-    # image: mcr.microsoft.com/mssql/server:latest
     image:  mcr.microsoft.com/azure-sql-edge
     restart: unless-stopped
     environment:
@@ -33,23 +38,38 @@ services:
       ACCEPT_EULA: Y
     networks:
       - observability
+  prometheus:
+    image: prom/prometheus   
+    ports:
+      - "9090:9090"
+    networks:
+      - observability
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
   jaeger:
+    depends_on:
+      - prometheus
     image: jaegertracing/all-in-one:latest
     environment:
       COLLECTOR_OTLP_ENABLED: "true"
       COLLECTOR_ZIPKIN_HTTP_PORT: "9411"
       LOG_LEVEL: "debug"
+      JAEGER_DISABLED: "true"
+      METRICS_STORAGE_TYPE: "prometheus"
+      PROMETHEUS_SERVER_URL: "http://prometheus:9090"
+    command: ["--collector.otlp.http.cors.allowed-origins=*", "--collector.otlp.http.cors.allowed-headers=*","--prometheus.query.support-spanmetrics-connector=true"]
     ports:
-      - "4317:4317"
-      - "4318:4318"
-      - "16686:16686"
-      - "6831:6831/udp"
-      - "6832:6832/udp"
-      - "5778:5778"
-      - "14268:14268"
-      - "14250:14250"
-      - "9411:9411"
+      - "4317:4317" # OTLP gRPC
+      - "4318:4318" # OTLP HTTP
+      - "16686:16686" # Jaeger UI
+      - "6831:6831/udp" # Jaeger compact thrift
+      - "6832:6832/udp" # Jaeger binary thrift over UDP
+      - "5778:5778" # Jaeger config REST API
+      - "14268:14268" # Jaeger compact thrift over HTTP
+      - "14250:14250" # Jaeger model HTTP
+      - "9411:9411" # Zipkin
     networks:
       - observability
+  
 networks:
   observability:

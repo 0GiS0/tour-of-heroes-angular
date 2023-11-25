@@ -9,7 +9,6 @@ import { getWebAutoInstrumentations } from '@opentelemetry/auto-instrumentations
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
 import { ZoneContextManager } from '@opentelemetry/context-zone';
 
-
 const provider = new WebTracerProvider();
 //provider.addSpanProcessor(new SimpleSpanProcessor(new ConsoleSpanExporter()));
 // Batch traces before sending them to Jaeger
@@ -23,7 +22,7 @@ provider.addSpanProcessor(
 );
 
 provider.register({
-  contextManager: new ZoneContextManager(),  
+  contextManager: new ZoneContextManager(),
 });
 
 registerInstrumentations({
@@ -35,5 +34,5 @@ registerInstrumentations({
       '@opentelemetry/instrumentation-fetch': {},
       '@opentelemetry/instrumentation-xml-http-request': {},
     }),
-  ],  
+  ],
 });

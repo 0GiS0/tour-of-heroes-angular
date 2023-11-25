@@ -6,13 +6,17 @@ WORKDIR /app
 
 COPY package.json /app
 
-RUN npm install
+RUN npm install --force
 
 COPY . /app
 
 RUN npm run build --prod
 
 FROM nginx:stable
+
+EXPOSE 80
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build-step /app/dist/angular-tour-of-heroes /usr/share/nginx/html
 

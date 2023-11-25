@@ -1,13 +1,26 @@
 name: Continuous Integration
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
 jobs:
-  # Confirm that prettier was run on the changes
   prettier:
     uses: 0GiS0/tour-of-heroes-angular/.github/workflows/prettier-ci.yml@main
-  # Make sure eslint passes
-  # eslint:
-  #   uses: 0GiS0/tour-of-heroes-angular/.github/workflows/eslint-ci.yml@main
+  eslint:
+    uses: 0GiS0/tour-of-heroes-angular/.github/workflows/eslint-ci.yml@main
+
+  generate_tag_if_push:
+    needs: [prettier, eslint]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.64.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: false

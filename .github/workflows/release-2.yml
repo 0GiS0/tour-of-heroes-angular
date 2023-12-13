@@ -1,17 +1,14 @@
-name: Generate Angular release
-
+name: Generate Release
 on:
   push:
     tags:
-      - v*
-
-env:
-  NODE_VERSION: 18.x
+      - "[0-9]+.[0-9]+.[0-9]+*"
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+      - name: Build and zip
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
         with:
@@ -23,24 +20,16 @@ jobs:
         run: mv web.config dist/angular-tour-of-heroes/web.config
       - name: Zip dist
         run: cd dist/angular-tour-of-heroes ; zip -r ../../dist.zip . * ; cd ../../
-      - name: Check package version
-        uses: technote-space/package-version-check-action@v1.9.3
-      # - name: Build changelog
-      #   id: build_changelog
-      #   uses: mikepenz/release-changelog-builder-action@v4.1.0
-      #   with:
-      #     configuration: "release-changelog-builder-config.json"
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
         id: create_release
-        uses: actions/create-release@latest
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          # body: ${{steps.build_changelog.outputs.changelog}}
+          body: |
+            Release generated automatically by GitHub Actions
           draft: false
           prerelease: false
       - name: Upload Release Asset
@@ -51,5 +40,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./dist.zip
-          asset_name: "dist.zip"
+          asset_name: dist.zip
           asset_content_type: application/zip

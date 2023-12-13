@@ -1,7 +1,7 @@
 name: Generate Angular release
 
 on:
-  push:
+  create:
     tags:
       - "[0-9]+.[0-9]+.[0-9]+*"
 env:

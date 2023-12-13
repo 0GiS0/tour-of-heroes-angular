@@ -3,8 +3,11 @@ name: Generate Angular release
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
     tags:
-      - "*"
+      - v*
+    
 env:
   NODE_VERSION: 18.x
 jobs:

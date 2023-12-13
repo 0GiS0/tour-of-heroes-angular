@@ -2,7 +2,8 @@ name: Generate Angular release
 
 on:
   create:
-    tags:      
+    tags:
+     - '*'  
 env:
   NODE_VERSION: 18.x
 jobs:

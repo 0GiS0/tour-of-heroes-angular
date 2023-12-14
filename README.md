@@ -42,9 +42,10 @@ En esta versión del proyecto, se añade imágenes a nuestros heroes. Se ha modi
     </div>
 </div>
 ```
+
 Se ha dejado comentado lo anterior para que se vea la diferencia.
 
-También se ha modificado la página de detalle, en src/app/hero-detail/hero-detail.component.html para que se muestre el alter ego: 
+También se ha modificado la página de detalle, en src/app/hero-detail/hero-detail.component.html para que se muestre el alter ego:
 
 ```
  <!-- <div *ngIf="hero">

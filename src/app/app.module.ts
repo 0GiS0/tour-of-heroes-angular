@@ -19,7 +19,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { ReplacePipe } from './replace.pipe';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +27,7 @@ import { ReplacePipe } from './replace.pipe';
     MessagesComponent,
     DashboardComponent,
     HeroSearchComponent,
-    ReplacePipe //A pipe for replace characters
+    ReplacePipe, //A pipe for replace characters
   ],
   imports: [
     BrowserModule,
@@ -38,6 +37,6 @@ import { ReplacePipe } from './replace.pipe';
     // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

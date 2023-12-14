@@ -98,12 +98,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "angular-tour-of-heroes",
   "cli": {
-    "analytics": "d725f090-d23e-42b6-9f95-7f5d568bca28"
+    "analytics": "b96e80d7-7b19-422f-979c-bd9a82360fb4",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

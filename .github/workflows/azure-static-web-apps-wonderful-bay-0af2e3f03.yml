@@ -19,7 +19,9 @@ jobs:
         with:
           submodules: true
           lfs: false
-      - run: sudo apt-get install gettext-base
+      - run: | 
+          sudo apt-get update
+          sudo apt-get install gettext-base -y
         name: Install gettext
       - name: Build And Deploy
         id: builddeploy

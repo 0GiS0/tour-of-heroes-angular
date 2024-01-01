@@ -19,7 +19,8 @@ jobs:
         with:
           submodules: true
           lfs: false
-      - run: apt-get install gettext-base
+      - run: sudo apt-get install gettext-base
+        name: Install gettext
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1

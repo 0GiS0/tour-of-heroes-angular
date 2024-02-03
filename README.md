@@ -1,3 +1,5 @@
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/0gis0/tour-of-heroes-angular)
+
 # Aplicación de ejemplo en Angular: Tour Of Heroes
 
 Este proyecto es una aplicación en AngularJS que muestra un listado de heroes. Proviene del [tutorial de AngularJS](https://angular.io/tutorial). Sin embargo, se han llevado a cabo ciertas modificaciones para que este utilice una API en .NET Core que puedes encontrar [aquí](https://github.com/0GiS0/tour-of-heroes-dotnet-api).

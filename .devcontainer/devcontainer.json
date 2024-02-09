@@ -9,13 +9,9 @@
   "features": {
     "ghcr.io/devcontainers-contrib/features/angular-cli:2": {}
   },
-  "forwardPorts": [
-    16686, // Jaeger
+  "forwardPorts": [   
     4200, // Angular
-    5010, // Web API
-    4317, // Jaeger collector HTTP
-    4318, // Jaeger collector gRPC
-    9090 // Prometheus
+    5010 // Web API    
   ],
   "customizations": {
     "vscode": {

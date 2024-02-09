@@ -6,8 +6,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ../..:/workspaces:cached
-    environment:
-      OTEL_SERVICE_NAME: tour-of-heroes-angular
+    environment:      
       API_URL: https://${CODESPACE_NAME}-5010.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}/api/hero
     command: sleep infinity
   api:
@@ -15,7 +14,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db,1433;Initial Catalog=heroes;Persist Security Info=False;User ID=sa;Password=P@ssword;TrustServerCertificate=True;
-      - OTLP_ENDPOINT_URL=http://jaeger:4317
     ports:
       - "5010:5000"
   db:

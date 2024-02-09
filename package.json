@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-with-api-url": "envsub src/assets/env.template.js src/assets/env.js && ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prettier-check": "prettier --check \"./**/*.{md,jsx,json,html,css,js,yml,ts,tsx}\"",
@@ -21,12 +22,9 @@
     "@angular/platform-browser": "^14.3.0",
     "@angular/platform-browser-dynamic": "^14.3.0",
     "@angular/router": "^14.3.0",
-    "@opentelemetry/auto-instrumentations-web": "^0.34.0",
-    "@opentelemetry/context-zone": "^1.18.1",
-    "@opentelemetry/exporter-trace-otlp-http": "^0.45.1",
-    "@opentelemetry/instrumentation": "^0.45.1",
-    "@opentelemetry/sdk-trace-web": "^1.18.1",
-    "angular-in-memory-web-api": "^0.11.0",
+    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/parser": "^6.16.0",
+    "angular-in-memory-web-api": "^0.11.0",    
     "prettier": "^3.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.4.1",
@@ -43,8 +41,6 @@
     "@angular/compiler-cli": "^14.3.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.20.55",
-    "@typescript-eslint/eslint-plugin": "6.14.0",
-    "@typescript-eslint/parser": "5.43.0",
     "eslint": "^8.28.0",
     "jasmine-core": "~5.1.1",
     "karma": "~6.4.2",
@@ -53,6 +49,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "prettier-check": "^2.0.0",
-    "typescript": "~4.6.4"
+    "typescript": "~4.6.4",
+    "envsub": "^4.1.0"
   }
 }

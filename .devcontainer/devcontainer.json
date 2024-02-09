@@ -2,6 +2,7 @@
 {
   "name": "Tour of heroes - Angular",
   "dockerComposeFile": "docker-compose.yaml",
+  "containerEnv": {},
   "service": "workspace",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "remoteUser": "node",
@@ -27,6 +28,6 @@
         "humao.rest-client"
       ]
     }
-  }
-  //"postCreateCommand": "npm install --force && npm run start"
+  },
+  "postCreateCommand": "envsubst < src/assets/env.template.js > src/assets/env.js && npm install && npm run start"
 }

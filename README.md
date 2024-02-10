@@ -55,7 +55,30 @@ Esta función llama a nuestra API para recuperar el SAS para poder subir la imag
 
 ## Cómo lo ejecuto
 
-**IMPORTANTE**: Antes de ejecutar este proyecto necesitas tener la API en .NET ejecutándose. Más información [aquí](https://github.com/0GiS0/tour-of-heroes-dotnet-api) Sin embargo, para esta versión necesitas que sea el branch **azure-storage-pics**. Este debe tener configurado correctamente la cuenta de almacenamiento que has utilizado en esta parte.
+**IMPORTANTE**: Antes de ejecutar este proyecto necesitas en local Azurite ejecutándose. Para ello puedes lanzar el siguiente comando:
+
+```bash
+docker run \
+--name azurite \
+-p 10000:10000 \
+-p 10001:10001 \
+mcr.microsoft.com/azure-storage/azurite
+```
+
+Una vez lo tengas es importante que configures CORS para que la API pueda subir imágenes. Para ello puedes ejecutar el siguiente comando:
+
+```bash
+az storage cors add \
+--methods GET POST PUT DELETE \
+--origins '*' \
+--services b \
+--max-age 60 \
+--allowed-headers '*' \
+--exposed-headers '*' \
+--connection-string "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;TableEndpoint=http://127.0.0.1:10002/devstoreaccount1;"
+```
+
+tener la API en .NET ejecutándose. Más información [aquí](https://github.com/0GiS0/tour-of-heroes-dotnet-api) Sin embargo, para esta versión necesitas que sea el branch **azure-storage-pics**. Este debe tener configurado correctamente la cuenta de almacenamiento que has utilizado en esta parte.
 
 Lo primero que debes hacer es descargarte el proyecto en local y apuntar al branch az-storage-from-js:
 

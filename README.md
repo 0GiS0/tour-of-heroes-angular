@@ -1,3 +1,5 @@
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/0gis0/tour-of-heroes-angular)
+
 # Aplicación de ejemplo en Angular: Tour Of Heroes
 
 En esta versión del proyecto, se añade imágenes a nuestros heroes. Se ha modificado el archivo app/heroes/heroes.component.html con lo siguiente:

@@ -2,5 +2,5 @@
   window["env"] = window["env"] || {};
 
   // Environment variables
-  window["env"]["ApiUrl"] = "http://localhost:5000/api/hero";
+  window["env"]["ApiUrl"] = "https://localhost:5001/api/hero";
 })(this);

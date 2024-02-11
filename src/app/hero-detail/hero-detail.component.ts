@@ -11,6 +11,7 @@ import { HeroService } from '../hero.service';
 })
 export class HeroDetailComponent implements OnInit {
   @Input() hero?: Hero;
+  alterEgoPic?: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +25,22 @@ export class HeroDetailComponent implements OnInit {
 
   getHero(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.heroService.getHero(id).subscribe((hero) => (this.hero = hero));
+    this.heroService.getHero(id).subscribe(hero => this.hero = hero);
+    this.getAlterEgoPic();
+  }
+
+  getAlterEgoPic(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.heroService.getAlterEgoPic(id).subscribe(alterEgoPic => {
+      let reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.alterEgoPic = e.target.result;
+      };
+
+      if (alterEgoPic) {
+        reader.readAsDataURL(alterEgoPic);
+      }
+    });
   }
 
   goBack(): void {
@@ -34,6 +50,14 @@ export class HeroDetailComponent implements OnInit {
   save(): void {
     if (this.hero) {
       this.heroService.updateHero(this.hero).subscribe(() => this.goBack());
+    }
+  }
+
+  receiveMessage($event: any) {
+
+    if ($event == "newAlterEgoImage") {
+      console.log("A new image was uploaded");
+      this.getAlterEgoPic();
     }
   }
 }

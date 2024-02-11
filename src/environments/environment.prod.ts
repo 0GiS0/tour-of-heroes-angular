@@ -1,6 +1,5 @@
 export const environment = {
   production: true,
-  containerName: "alteregos",
-  apiUrl: "https://tour-of-heroes-free-account-background-process.azurewebsites.net/api/hero",
-  storageUrl: "https://lemonheroes.blob.core.windows.net"
+  // apiUrl: 'http://localhost:30040/api/hero'
+  apiUrl: window['env']['ApiUrl'] || 'http://localhost:5010/api/hero',
 };

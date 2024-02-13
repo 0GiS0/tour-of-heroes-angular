@@ -5,17 +5,8 @@
 En esta versión del proyecto, se crea una cuenta de almacenamiento en Azure Storage con estos comandos:
 
 ```
-<<<<<<< HEAD
 #Para ver todos los comandos que ofrece Azure CLI
 az
-=======
-//In memory web api
-// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-// import { InMemoryDataService } from './in-memory-data.service';
-```
-
-Y el que se referencia en el apartado imports:
->>>>>>> 49394d9a547d47d9ac8a194a14b5489139ab4174
 
 #Para iniciar sesión en la suscripción sobre la que quieres operar
 az login

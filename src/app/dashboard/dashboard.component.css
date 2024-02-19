@@ -1,20 +1,20 @@
 /* DashboardComponent's private CSS styles */
 
 h2 {
-    text-align: center;
+  text-align: center;
 }
 
 .heroes-menu {
-    padding: 0;
-    margin: auto;
-    max-width: 1000px;
-    /* flexbox */
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: flex-start;
-    align-items: flex-start;
+  padding: 0;
+  margin: auto;
+  max-width: 1000px;
+  /* flexbox */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+  align-items: flex-start;
 }
 
 a {
@@ -37,10 +37,10 @@ a {
 }
 
 @media (min-width: 600px) {
-    a {
-        width: 18%;
-        box-sizing: content-box;
-    }
+  a {
+    width: 18%;
+    box-sizing: content-box;
+  }
 }
 
 a:hover {

@@ -1,3 +1,5 @@
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/0gis0/tour-of-heroes-angular)
+
 # Aplicación de ejemplo en Angular: Tour Of Heroes
 
 En esta versión del proyecto hemos instrumentalizado el mismo con Application Insights. Para ello hemos instalado dos nuevos paquetes:

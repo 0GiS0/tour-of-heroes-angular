@@ -7,7 +7,7 @@ export const environment = {
   containerName: "alteregos",
   apiUrl: "https://localhost:5001/api/hero",
   appInsights: {
-    instrumentationKey: "e69ae07b-5bce-42f9-90f7-37d1e34f8c90"
+    instrumentationKey: "9ff425c5-0949-4e13-9970-fcd4066ce274"
   },
   storageUrl: "http://127.0.0.1:10000/devstoreaccount1"
 };

@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class HeroService {
   // private heroesUrl = 'api/heroes';
-  private heroesUrl = environment.apiUrl; //URL to the web api
+  private heroesUrl = environment.apiUrl;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -26,6 +26,10 @@ export class HeroService {
 
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
+  }
+
+  getAlterEgoPic(id: number): Observable<Blob> {
+    return this.http.get(`${this.heroesUrl}/alteregopic/${id}`, { responseType: 'blob' });
   }
 
   getHeroes(): Observable<Hero[]> {

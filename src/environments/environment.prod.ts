@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  // apiUrl: 'http://localhost:30040/api/hero'
-  apiUrl: window['env']['ApiUrl'] || 'http://localhost:5010/api/hero',
+  apiUrl: 'https://tour-of-heroes.azurewebsites.net/api/hero',
+  storageUrl: "https://heroespics.blob.core.windows.net"
 };

@@ -1,5 +1,9 @@
 export const environment = {
   production: true,
-  // apiUrl: 'http://localhost:30040/api/hero'
-  apiUrl: window['env']['ApiUrl'] || 'http://localhost:5010/api/hero',
+  containerName: "alteregos",
+  apiUrl: 'https://tour-of-heroes.azurewebsites.net/api/hero',
+  appInsights: {
+    instrumentationKey: "9ff425c5-0949-4e13-9970-fcd4066ce274"
+  },
+  storageUrl: "https://heroespics.blob.core.windows.net"
 };

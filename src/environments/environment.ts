@@ -4,9 +4,12 @@
 
 export const environment = {
   production: false,
-  //apiUrl: 'http://localhost:5010/api/hero'
-  apiUrl: window['env']['ApiUrl'] || 'http://localhost:5010/api/hero',
-  // apiUrl: 'https://tour-of-heroes-functions.azurewebsites.net/api',
+  containerName: "alteregos",
+  apiUrl: "https://localhost:5001/api/hero",
+  appInsights: {
+    instrumentationKey: "9ff425c5-0949-4e13-9970-fcd4066ce274"
+  },
+  storageUrl: "http://127.0.0.1:10000/devstoreaccount1"
 };
 
 /*

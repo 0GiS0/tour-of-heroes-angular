@@ -13,13 +13,16 @@ export class MessageService {
       let res = await fetch('http://localhost:7071/api/negotiate');
       let url = await res.json();
       console.log(`url: ${url.url}`);
-      this.ws = new WebSocket(url.url);
+      this.ws = new WebSocket(url.url,"json.webpubsub.azure.v1");
 
       this.ws.onopen = () => console.log('connected');
 
       this.ws.onclose = e => console.log(`connection closed (${e.code})`);
 
-      this.ws.onerror = e => console.log(e);
+      this.ws.onerror = e => {
+        console.log('error');
+        console.log(e);
+      };
 
       this.receiveMessage();
 
@@ -36,7 +39,10 @@ export class MessageService {
       this.ws!.send(JSON.stringify(
         {
           from: 'me',
-          content: message,
+          type: 'sendToGroup',
+          dataType: 'text',
+          group: 'group1',
+          data: message,
         }
       ));
 

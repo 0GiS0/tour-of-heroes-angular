@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Hero } from './hero';
-// import { HEROES } from './mock-heroes';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 
@@ -12,11 +11,7 @@ import { MonitoringService } from './logging.service';
 @Injectable({
   providedIn: 'root',
 })
-export class HeroService {
-  // private heroesUrl = 'api/heroes';
-  // private heroesUrl = 'https://localhost:5001/api/hero';
-  // private heroesUrl = 'https://tour-of-heroes-webapi.azurewebsites.net/api/hero'; //URL to the web api
-  // private heroesUrl = 'https://tour-of-heroes-webapi-azure-storage.azurewebsites.net/api/hero';
+export class HeroService {  
 
   private heroesUrl = environment.apiUrl;
 

@@ -9,9 +9,9 @@
   "features": {
     "ghcr.io/devcontainers-contrib/features/angular-cli:2": {}
   },
-  "forwardPorts": [   
+  "forwardPorts": [
     4200, // Angular
-    5010 // Web API    
+    5010 // Web API
   ],
   "customizations": {
     "vscode": {

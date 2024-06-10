@@ -27,17 +27,18 @@ services:
       ACCEPT_EULA: Y
   init-db:
     image: mcr.microsoft.com/azure-sql-edge
-    command: >
-      /bin/bash -c "
-      # Comando para esperar a que SQL esté listo (pseudocódigo)
-      while ! sqlcmd -U sa -P P@ssword -Q 'SELECT 1'; do
-        sleep 1
-      done;
-      # Comando para inicializar la base de datos, reemplazar con tu script real
-      sqlcmd -U sa -P P@ssword -i /init/db-init.sql;
-      "
+    command: >      
+        /bin/bash -c "
+          while ! /opt/mssql-tools/bin/sqlcmd -S db -U sa -P 'P@ssword' -Q 'SELECT * FROM sys.databases' > /dev/null 2>&1; do
+            echo 'Waiting for SQL Server to become available...'
+            sleep 1
+          done;
+          echo 'SQL Server is now available.'
+          
+          /opt/mssql-tools/bin/sqlcmd -S db -U sa -P 'P@ssword' -i /tmp/db-init.sql;
+        "
     volumes:
-      - ./db-init.sql:/init/db-init.sql
+      - ./db-init.sql:/tmp/db-init.sql
     environment:
       SA_PASSWORD: P@ssword
       ACCEPT_EULA: Y

@@ -22,3 +22,5 @@ services:
     environment:
       SA_PASSWORD: P@ssword
       ACCEPT_EULA: Y
+    volumes:
+      - ./db-init.sql:/docker-entrypoint-initdb.d/db-init.sql

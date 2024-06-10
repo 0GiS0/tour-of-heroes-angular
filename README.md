@@ -74,3 +74,15 @@ npm start
 ```
 
 El proceso arrancará y estará disponible en esta dirección: [http://localhost:4200/](http://localhost:4200/)
+
+## Uso de Datos de Muestra para Pruebas
+
+Para facilitar las pruebas en el entorno de desarrollo, se ha incluido un conjunto de datos de muestra en la base de datos del contenedor de desarrollo. Estos datos permiten probar la aplicación sin necesidad de configurar una base de datos externa o realizar inserciones manuales de datos.
+
+Para utilizar estos datos de muestra, asegúrate de que el contenedor de desarrollo esté en ejecución y sigue estos pasos:
+
+1. Accede al contenedor de la base de datos utilizando tu herramienta de gestión de bases de datos preferida.
+2. Verifica que los datos de muestra se han insertado correctamente ejecutando consultas de selección en las tablas relevantes.
+3. Utiliza estos datos para realizar pruebas de funcionalidad en la aplicación.
+
+Estos datos de muestra están diseñados para cubrir casos de uso comunes y facilitar el proceso de desarrollo y pruebas.

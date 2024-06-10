@@ -10,17 +10,35 @@ services:
       API_URL: https://${CODESPACE_NAME}-5010.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}/api/hero
     command: sleep infinity
   api:
+    depends_on:
+      - db
+      - init-db
     image: ghcr.io/0gis0/tour-of-heroes-dotnet-api/tour-of-heroes-api:6b947c4
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db,1433;Initial Catalog=heroes;Persist Security Info=False;User ID=sa;Password=P@ssword;TrustServerCertificate=True;
     ports:
       - "5010:5000"
-  db:
+  db:    
     image:  mcr.microsoft.com/azure-sql-edge
     restart: unless-stopped
     environment:
       SA_PASSWORD: P@ssword
       ACCEPT_EULA: Y
+  init-db:
+    image: mcr.microsoft.com/azure-sql-edge
+    command: >
+      /bin/bash -c "
+      # Comando para esperar a que SQL esté listo (pseudocódigo)
+      while ! sqlcmd -U sa -P P@ssword -Q 'SELECT 1'; do
+        sleep 1
+      done;
+      # Comando para inicializar la base de datos, reemplazar con tu script real
+      sqlcmd -U sa -P P@ssword -i /init/db-init.sql;
+      "
     volumes:
-      - ./db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
+      - ./db-init.sql:/init/db-init.sql
+    environment:
+      SA_PASSWORD: P@ssword
+      ACCEPT_EULA: Y
+    restart: on-failure

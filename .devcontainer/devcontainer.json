@@ -17,18 +17,18 @@
     "vscode": {
       "settings": {
         "mssql.connections": [
-					{
-						"server": "db,1433",
-						"database": "heroes",
-						"authenticationType": "SqlLogin",
-						"user": "sa",
-						"password": "P@ssword",
-						"emptyPasswordInput": false,
-						"savePassword": false,
-						"profileName": "mssql-container",
-						"trustServerCertificate": true            
-					}
-				]
+          {
+            "server": "db,1433",
+            "database": "heroes",
+            "authenticationType": "SqlLogin",
+            "user": "sa",
+            "password": "P@ssword",
+            "emptyPasswordInput": false,
+            "savePassword": false,
+            "profileName": "mssql-container",
+            "trustServerCertificate": true
+          }
+        ]
       },
 
       "extensions": [

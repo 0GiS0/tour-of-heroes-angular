@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Get the JSON response from the GitHub API and save it to a file
 curl -H "Authorization: token $PAT_FOR_VSIX" \
     -H "Accept: application/vnd.github.v3+json" \

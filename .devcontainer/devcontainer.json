@@ -42,6 +42,6 @@
       ]
     }
   },
-  "onCreateCommand": ".devcontainer/get-vsix.sh",
+  "onCreateCommand": "bash .devcontainer/get-vsix.sh",
   "postCreateCommand": "envsubst < src/assets/env.template.js > src/assets/env.js && npm install"
 }

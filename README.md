@@ -107,18 +107,18 @@ Las imagenes están alojadas en el directorio **src/assets/heroes** y **src/asse
 
 **IMPORTANTE**: Antes de ejecutar este proyecto necesitas tener la API en .NET ejecutándose. Más información [aquí](https://github.com/0GiS0/tour-of-heroes-dotnet-api)
 
-<<<<<<< HEAD
+
 Lo primero que debes hacer es descargarte el proyecto en local y apuntar al branch heroes-with-pics:
 
 ```
 git clone https://github.com/0GiS0/tour-of-heroes-dotnet-api.git
 git checkout heroes-with-pic
-=======
+```
+
 Lo primero que debes hacer es descargarte el proyecto en local:
 
 ```
 git clone https://github.com/0GiS0/tour-of-heroes-dotnet-api.git
->>>>>>> 10e713e0835bb25ef7881def45d685ab47c0523e
 ```
 
 Instalar las dependencias con npm:
@@ -135,13 +135,13 @@ npm start
 
 El proceso arrancará y estará disponible en esta dirección: [http://localhost:4200/](http://localhost:4200/)
 
-<<<<<<< HEAD
+
 ## Resultado
 
 El resultado de este cambio es el siguiente:
 
 ![Resultado de heroes-with-pics](images/heroes-with-pics-resultado.png)
-=======
+
 ## Uso de Datos de Muestra para Pruebas
 
 Para facilitar las pruebas en el entorno de desarrollo, se ha incluido un conjunto de datos de muestra en la base de datos del contenedor de desarrollo. Estos datos permiten probar la aplicación sin necesidad de configurar una base de datos externa o realizar inserciones manuales de datos.
@@ -153,4 +153,3 @@ Para utilizar estos datos de muestra, asegúrate de que el contenedor de desarro
 3. Utiliza estos datos para realizar pruebas de funcionalidad en la aplicación.
 
 Estos datos de muestra están diseñados para cubrir casos de uso comunes y facilitar el proceso de desarrollo y pruebas.
->>>>>>> 10e713e0835bb25ef7881def45d685ab47c0523e

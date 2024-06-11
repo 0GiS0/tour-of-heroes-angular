@@ -36,9 +36,8 @@
         "GitHub.copilot",
         "dbaeumer.vscode-eslint",
         "DavidAnson.vscode-markdownlint",
-        "eamodio.gitlens",
-        "humao.rest-client",
-        "/tmp/vscode-azure-github-copilot-0.1.10.vsix"
+        "/tmp/vscode-azure-github-copilot-0.1.10.vsix",
+        "ms-vscode.vscode-node-azure-pack"
       ]
     }
   },

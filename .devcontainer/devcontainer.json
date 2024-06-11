@@ -32,8 +32,9 @@
 
       "extensions": [
         "ms-mssql.mssql",
-        "GitHub.copilot",
-        "ms-vscode.vscode-node-azure-pack"
+        "GitHub.copilot@prerelease",
+        "ms-vscode.vscode-node-azure-pack",
+        "/tmp/vscode-azure-github-copilot-0.1.10.vsix"
       ]
     }
   },

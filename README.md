@@ -107,7 +107,6 @@ Las imagenes están alojadas en el directorio **src/assets/heroes** y **src/asse
 
 **IMPORTANTE**: Antes de ejecutar este proyecto necesitas tener la API en .NET ejecutándose. Más información [aquí](https://github.com/0GiS0/tour-of-heroes-dotnet-api)
 
-
 Lo primero que debes hacer es descargarte el proyecto en local y apuntar al branch heroes-with-pics:
 
 ```
@@ -134,7 +133,6 @@ npm start
 ```
 
 El proceso arrancará y estará disponible en esta dirección: [http://localhost:4200/](http://localhost:4200/)
-
 
 ## Resultado
 

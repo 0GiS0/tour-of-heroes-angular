@@ -34,7 +34,7 @@
         "ms-mssql.mssql",
         "GitHub.copilot@prerelease",
         "ms-vscode.vscode-node-azure-pack",
-        "/tmp/vscode-azure-github-copilot-0.1.10.vsix"
+        "/tmp/vscode-azure-github-copilot.vsix"
       ]
     }
   },

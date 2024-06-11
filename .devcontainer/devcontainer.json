@@ -15,8 +15,25 @@
   ],
   "customizations": {
     "vscode": {
+      "settings": {
+        "mssql.connections": [
+          {
+            "server": "db,1433",
+            "database": "heroes",
+            "authenticationType": "SqlLogin",
+            "user": "sa",
+            "password": "P@ssword",
+            "emptyPasswordInput": false,
+            "savePassword": false,
+            "profileName": "mssql-container",
+            "trustServerCertificate": true
+          }
+        ]
+      },
+
       "extensions": [
         "ms-azuretools.vscode-docker",
+        "ms-mssql.mssql",
         "GitHub.copilot",
         "dbaeumer.vscode-eslint",
         "DavidAnson.vscode-markdownlint",
@@ -25,5 +42,5 @@
       ]
     }
   },
-  "postCreateCommand": "envsubst < src/assets/env.template.js > src/assets/env.js && npm install && npm run start"
+  "postCreateCommand": "envsubst < src/assets/env.template.js > src/assets/env.js && npm install"
 }

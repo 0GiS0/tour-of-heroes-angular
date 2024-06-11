@@ -2,5 +2,5 @@
   window["env"] = window["env"] || {};
 
   // Environment variables
-  window["env"]["ApiUrl"] = "https://refactored-space-memory-jrvqq9v7pc5v6j-5010.app.github.dev/api/hero";
+  window["env"]["ApiUrl"] = "https://expert-happiness-r7qppwvv7f5xqj-5010.app.github.dev/api/hero";
 })(this);

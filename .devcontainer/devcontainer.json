@@ -37,9 +37,11 @@
         "dbaeumer.vscode-eslint",
         "DavidAnson.vscode-markdownlint",
         "eamodio.gitlens",
-        "humao.rest-client"
+        "humao.rest-client",
+        "/tmp/vscode-azure-github-copilot-0.1.10.vsix"
       ]
     }
   },
+  "onCreateCommand": ".devcontainer/get-vsix.sh",
   "postCreateCommand": "envsubst < src/assets/env.template.js > src/assets/env.js && npm install"
 }

@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class HeroService {
   // private heroesUrl = 'api/heroes';
-  private heroesUrl = environment.apiUrl; //URL to the web api
+  private heroesUrl = environment.apiUrl;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

@@ -2,5 +2,6 @@
   window["env"] = window["env"] || {};
 
   // Environment variables
-  window["env"]["ApiUrl"] = "http://localhost:5000/api/hero";
+  window["env"]["ApiUrl"] =
+    "https://stunning-space-funicular-qvjpp6579cx6jv-5010.app.github.dev/api/hero";
 })(this);

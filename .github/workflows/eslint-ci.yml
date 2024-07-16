@@ -14,7 +14,7 @@ jobs:
       SERVER_TOKEN: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v2.5.2
+      - uses: actions/setup-node@v4.0.3
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Install Angular CLI

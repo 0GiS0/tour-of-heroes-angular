@@ -13,7 +13,7 @@ jobs:
       # Use the git sha as a unique token for Turbo Repo
       SERVER_TOKEN: ${{ github.sha }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4.0.3
         with:
           node-version: ${{ env.NODE_VERSION }}

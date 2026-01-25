@@ -21,6 +21,9 @@ on:
           - configuration
           - bugs
           - maintainability
+          - ux-design
+          - favicon
+          - readme
 
 permissions:
   contents: read
@@ -40,6 +43,21 @@ jobs:
           curl -fsSL https://gh.io/copilot-install | bash
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
+      - name: 🔧 Configure Playwright MCP Server
+        run: |
+          mkdir -p ~/.copilot
+          cat > ~/.copilot/mcp-config.json << 'EOF'
+          {
+            "servers": {
+              "playwright": {
+                "command": "npx",
+                "args": ["@playwright/mcp@latest"]
+              }
+            }
+          }
+          EOF
+          echo "✅ Playwright MCP Server configured"
+
       - name: 🤖 Analyze code and create discussions with Copilot CLI
         env:
           GH_TOKEN: ${{ secrets.COPILOT_PAT }}
@@ -49,7 +67,7 @@ jobs:
 
           # Build the prompt based on suggestion type
           if [ "$SUGGESTION_TYPE" = "all" ]; then
-            CATEGORIES="Security, Performance, Refactoring, Testing, Documentation, Architecture, Configuration, Bugs, and Maintainability"
+            CATEGORIES="Security, Performance, Refactoring, Testing, Documentation, Architecture, Configuration, Bugs, Maintainability, UX/Design, Favicon, and README improvements"
           else
             CATEGORIES="$SUGGESTION_TYPE"
           fi
@@ -67,29 +85,66 @@ jobs:
              - The title structure (emojis, prefixes, etc.)
              - The body structure (sections, formatting)
 
-          3. THIRD: Analyze all the code in this repository looking for improvements in: $CATEGORIES
+          3. THIRD: Build and run the Angular application to analyze its UI:
+             a) Run 'npm install' to install dependencies
+             b) Run 'npm run build' to build the application
+             c) Start a local server to serve the built application (use 'npx serve dist/angular-tour-of-heroes/browser -l 4200' or similar)
+             d) Use the Playwright MCP Server to navigate to the running application
+             e) Take screenshots of:
+                - The main page (dashboard)
+                - The Heroes list page
+                - A hero detail page (click on a hero)
+                - The search functionality in action
+             f) Analyze the screenshots for:
+                - Overall visual design quality (colors, spacing, typography, modern look)
+                - Usability issues (button sizes, contrast, responsive design)
+                - Missing UI elements (loading states, error states, empty states)
+                - Accessibility concerns (color contrast, focus indicators)
+                - Suggestions for improving the Look & Feel
 
-          4. FOURTH: Before creating any discussion, use the GitHub MCP Server to search for existing ISSUES 
+          4. FOURTH: Check if the application has a custom favicon:
+             - Look for favicon files in src/assets or src/ folder
+             - Check index.html for favicon link tags
+             - If no custom favicon exists or it's the default Angular favicon, suggest creating one
+
+          5. FIFTH: Analyze the README.md file:
+             - Check if it has proper project description
+             - Check if it includes screenshots of the application (use the ones you took!)
+             - Check if it has installation instructions
+             - Check if it has usage instructions
+             - Check if it has contribution guidelines
+             - Suggest improvements including adding the screenshots you captured
+
+          6. SIXTH: Analyze all the code in this repository looking for improvements in: $CATEGORIES
+
+          7. SEVENTH: Before creating any discussion, use the GitHub MCP Server to search for existing ISSUES 
              in this repository that might be related to each suggestion.
              - Search issues using relevant keywords from your suggestion
              - Check both open AND closed issues
              - If an issue already exists that covers the same topic/improvement, DO NOT create a discussion for it
              - Only proceed to create a discussion if NO related issue exists
 
-          5. FIFTH: For each important suggestion that has NO related existing issue, create a DISCUSSION in this repository.
+          8. EIGHTH: For each important suggestion that has NO related existing issue, create a DISCUSSION in this repository.
              CRITICAL REQUIREMENTS for each discussion:
              - Category: Use the 'Ideas' category (or equivalent found in step 1)
              - Title: Follow EXACTLY the same style as existing discussions
              - Language: Use the SAME language as existing discussions
              - Body: Use the SAME structure as existing discussions
              - Include a section explaining what the suggestion is and why it would improve the codebase
+             - For UX/Design suggestions, reference the screenshots you took and describe what you observed
+             - For README suggestions, include recommendations for adding screenshots and better documentation
              - Footer: Include 'This discussion was automatically generated by Copilot CLI'
              
              ⚠️ LABELS ARE MANDATORY ⚠️
              After creating each discussion, you MUST add labels to it using the GitHub MCP Server.
              - First, list available labels in the repository
-             - Then, add appropriate labels based on the suggestion type (e.g., 'enhancement', 'security', 'performance', 'documentation', etc.)
+             - Then, add appropriate labels based on the suggestion type (e.g., 'enhancement', 'security', 'performance', 'documentation', 'design', etc.)
              - Every discussion MUST have at least one label. DO NOT skip this step!
+
+          PRIORITY SUGGESTIONS (create discussions for these if issues don't exist):
+          1. Custom favicon - Every app should have a unique favicon, not the default Angular one
+          2. README with screenshots - The README should showcase the app with real screenshots
+          3. Look & Feel improvements - Based on your Playwright analysis of the running app
 
           Create individual discussions for each important suggestion, not a single discussion with everything.
           Use the GitHub MCP Server's create_discussion tool to create each discussion in the 'Ideas' category.

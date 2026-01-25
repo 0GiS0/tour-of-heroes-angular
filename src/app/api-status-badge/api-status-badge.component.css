@@ -63,6 +63,17 @@
   font-size: 11px;
 }
 
+.header-url {
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 400;
+  margin-left: 4px;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .badge-details {
   margin-top: 12px;
   padding-top: 12px;

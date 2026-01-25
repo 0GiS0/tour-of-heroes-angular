@@ -23,6 +23,31 @@ Proyecto Angular 21 basado en el tutorial "Tour of Heroes", conectado a una **AP
 - 🔍 Búsqueda en tiempo real
 - 🌐 Integración con API .NET Core
 - 🔄 RxJS y Observables
+- 🟢 Badge de estado de API en tiempo real
+
+## 🏥 Badge de Estado de API
+
+La aplicación incluye un badge visual en la esquina superior derecha que muestra el estado de conexión con la API en tiempo real.
+
+### Indicadores
+
+| Indicador | Significado                                             |
+| --------- | ------------------------------------------------------- |
+| 🟢        | **API saludable** - La API responde correctamente       |
+| 🔴        | **API no disponible** - No se puede conectar con la API |
+| 🔄        | **Verificando** - Comprobando el estado de la API       |
+
+### Características del Badge
+
+- **Vista compacta**: Muestra el nombre de la API, versión y estado
+- **Vista expandida**: Haz clic en el badge para ver detalles adicionales:
+  - Estado de la API (healthy/unhealthy)
+  - Nombre y versión de la API
+  - Entorno (Development/Production)
+  - URL del servidor
+  - Botón de actualización manual
+
+El componente verifica automáticamente el estado de la API al iniciar la aplicación y permite refrescar el estado manualmente cuando sea necesario.
 
 ## 🚀 Quick Start
 

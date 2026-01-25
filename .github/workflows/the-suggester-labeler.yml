@@ -82,6 +82,6 @@ jobs:
           - Total discussions checked
           - Discussions that needed labels
           - Labels added (or would be added in dry run mode)
-          " --allow-all-tools
+          " --allow-all-tools --model gpt-5-mini
 
           echo "✅ Discussion labeling completed"

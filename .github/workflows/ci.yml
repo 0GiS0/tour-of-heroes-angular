@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: 🚀 CI/CD
 
 on:
   push:
@@ -7,21 +7,69 @@ on:
   pull_request:
     branches:
       - main
+
+env:
+  NODE_VERSION: 22.x
+
 jobs:
   prettier:
+    name: 💅 Prettier
     uses: 0GiS0/tour-of-heroes-angular/.github/workflows/prettier-ci.yml@main
   eslint:
+    name: 🔍 ESLint
     uses: 0GiS0/tour-of-heroes-angular/.github/workflows/eslint-ci.yml@main
 
   generate_tag_if_push:
+    name: 🏷️ Generate Tag
     needs: [prettier, eslint]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    outputs:
+      new_tag: ${{ steps.create_tag.outputs.new_tag }}
     steps:
       - uses: actions/checkout@v4
-      - name: Bump version and push tag
+      - name: 🔖 Bump version and push tag
         id: create_tag
         uses: anothrNick/github-tag-action@1.75.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
+
+  release:
+    name: 📦 Release
+    needs: generate_tag_if_push
+    runs-on: ubuntu-latest
+    if: needs.generate_tag_if_push.outputs.new_tag != ''
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 🟢 Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      - name: 📦 Install dependencies
+        run: npm ci
+      - name: 🏗️ Build application
+        run: npm run build --if-present
+      - name: 📋 Copy web.config inside dist
+        run: mv web.config dist/angular-tour-of-heroes/browser/web.config
+      - name: 🗜️ Zip dist
+        run: cd dist/angular-tour-of-heroes/browser ; zip -r ../../../dist.zip . * ; cd ../../../
+      - name: 📝 Build changelog
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@v5
+        with:
+          configuration: 'release-changelog-builder-config.json'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 🎉 Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.generate_tag_if_push.outputs.new_tag }}
+          body: ${{ steps.build_changelog.outputs.changelog }}
+          files: dist.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

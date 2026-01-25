@@ -7,7 +7,8 @@
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "remoteUser": "node",
   "features": {
-    "ghcr.io/devcontainers-extra/features/angular-cli:2": {}
+    "ghcr.io/devcontainers-extra/features/angular-cli:2": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   "forwardPorts": [
     4200,
@@ -47,7 +48,8 @@
         "dbaeumer.vscode-eslint",
         "DavidAnson.vscode-markdownlint",
         "eamodio.gitlens",
-        "humao.rest-client"
+        "humao.rest-client",
+        "Angular.ng-template"
       ]
     }
   },

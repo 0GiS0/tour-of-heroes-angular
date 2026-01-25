@@ -41,9 +41,9 @@ La aplicación incluye un badge visual en la esquina superior derecha que muestr
 
 - **Vista compacta**: Muestra el nombre de la API, versión y estado
 - **Vista expandida**: Haz clic en el badge para ver detalles adicionales:
-  - Estado de la API (healthy/unhealthy)
+  - Estado de la API (saludable/no disponible)
   - Nombre y versión de la API
-  - Entorno (Development/Production)
+  - Entorno (Desarrollo/Producción)
   - URL del servidor
   - Botón de actualización manual
 

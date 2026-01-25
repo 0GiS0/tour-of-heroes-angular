@@ -27,7 +27,7 @@ jobs:
         id: build_changelog
         uses: mikepenz/release-changelog-builder-action@v5
         with:
-          configuration: "release-changelog-builder-config.json"
+          configuration: 'release-changelog-builder-config.json'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release

@@ -18,15 +18,17 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 // import { InMemoryDataService } from './in-memory-data.service';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 
-@NgModule({ declarations: [
-        AppComponent,
-        HeroesComponent,
-        HeroDetailComponent,
-        MessagesComponent,
-        DashboardComponent,
-        HeroSearchComponent,
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        FormsModule,
-        AppRoutingModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+@NgModule({
+  declarations: [
+    AppComponent,
+    HeroesComponent,
+    HeroDetailComponent,
+    MessagesComponent,
+    DashboardComponent,
+    HeroSearchComponent,
+  ],
+  bootstrap: [AppComponent],
+  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
+})
 export class AppModule {}

@@ -4,10 +4,10 @@ import { HeroService } from '../hero.service';
 import { MessageService } from '../message.service';
 
 @Component({
-    selector: 'app-heroes',
-    templateUrl: './heroes.component.html',
-    styleUrls: ['./heroes.component.css'],
-    standalone: false
+  selector: 'app-heroes',
+  templateUrl: './heroes.component.html',
+  styleUrls: ['./heroes.component.css'],
+  standalone: false,
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];

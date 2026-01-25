@@ -10,10 +10,7 @@
     "ghcr.io/devcontainers-extra/features/angular-cli:2": {},
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
-  "forwardPorts": [
-    4200,
-    5011
-  ],
+  "forwardPorts": [4200, 5011],
   "portsAttributes": {
     "4200": {
       "label": "🅰️ Angular Frontend",

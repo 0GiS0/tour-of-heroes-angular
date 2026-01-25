@@ -14,7 +14,7 @@ Proyecto Angular 21 basado en el tutorial "Tour of Heroes", conectado a una **AP
 
 |                                           Dashboard                                           |                                           Heroes                                           |                                          Detalle                                           |                                          Búsqueda                                          |
 | :-------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------: |
-| ![Dashboard](https://github.com/user-attachments/assets/c54786da-c1a7-49a0-bf45-aca5e690cb69) | ![Heroes](https://github.com/user-attachments/assets/a394f376-9566-4c7e-9441-a60797d51d61) | ![Detail](https://github.com/user-attachments/assets/36f6b884-b44d-4fe5-9947-34fb18ef5c6f) | ![Search](https://github.com/user-attachments/assets/01aa966d-fb96-48c8-a119-3d20feaaf6d1) |
+| ![Dashboard](https://github.com/user-attachments/assets/0dfe6f8a-de06-46fa-be7b-62f4342452ba) | ![Heroes](https://github.com/user-attachments/assets/25c12fc0-b693-43ae-a42d-3d748882a72b) | ![Detail](https://github.com/user-attachments/assets/0b23710b-ce3c-48a6-aff3-9e0d4823d230) | ![Search](https://github.com/user-attachments/assets/4f9f10c4-2856-43e4-86eb-904fd6ec64d0) |
 
 ## ✨ Características
 

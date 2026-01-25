@@ -61,19 +61,19 @@ button {
   min-width: 120px;
 }
 
-button:first-child {
+.back-button {
   background-color: var(--text-secondary);
 }
 
-button:first-child:hover {
+.back-button:hover {
   background-color: #555;
 }
 
-button:last-child {
+.save-button {
   background-color: var(--success-color);
 }
 
-button:last-child:hover {
+.save-button:hover {
   background-color: #45a049;
 }
 

@@ -27,7 +27,7 @@ jobs:
     outputs:
       new_tag: ${{ steps.create_tag.outputs.new_tag }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: 🔖 Bump version and push tag
         id: create_tag
         uses: anothrNick/github-tag-action@1.75.0
@@ -42,7 +42,7 @@ jobs:
     if: needs.generate_tag_if_push.outputs.new_tag != ''
     steps:
       - name: 📥 Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: 🟢 Setup Node.js ${{ env.NODE_VERSION }}

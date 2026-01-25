@@ -1,0 +1,111 @@
+name: 🏷️ Smart Issue & PR Labeler
+
+on:
+  issues:
+    types: [opened, edited]
+  pull_request:
+    types: [opened, edited]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  smart-label:
+    name: 🏷️ Analyze and Label
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Install GitHub Copilot CLI
+        run: |
+          curl -fsSL https://gh.io/copilot-install | bash
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: 🏷️ Analyze and assign labels
+        env:
+          GH_TOKEN: ${{ secrets.COPILOT_PAT }}
+          ITEM_TYPE: ${{ github.event_name == 'issues' && 'issue' || 'pull_request' }}
+          ITEM_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
+          ITEM_TITLE: ${{ github.event.issue.title || github.event.pull_request.title }}
+          ITEM_BODY: ${{ github.event.issue.body || github.event.pull_request.body }}
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+
+          copilot -p "
+          You are a smart labeling assistant. Your task is to analyze a newly opened/edited $ITEM_TYPE and ensure it has the correct labels.
+
+          ITEM DETAILS:
+          - Type: $ITEM_TYPE
+          - Number: #$ITEM_NUMBER
+          - Title: $ITEM_TITLE
+          - Body: $ITEM_BODY
+
+          Follow these steps:
+
+          1. FIRST: Use the GitHub MCP Server to list ALL available labels in this repository.
+             SAVE this list - you will ONLY use labels from this list.
+             DO NOT create new labels unless absolutely necessary (step 6).
+
+          2. SECOND: Use the GitHub MCP Server to get the current labels on $ITEM_TYPE #$ITEM_NUMBER.
+             Note which labels are already assigned.
+
+          3. THIRD: Analyze the title and body to determine what this $ITEM_TYPE is about:
+             - Is it a bug report? → 'bug' label
+             - Is it a feature request? → 'enhancement' label
+             - Is it about documentation? → 'documentation' label
+             - Is it about security? → 'security' label (if exists)
+             - Is it about performance? → 'performance' label (if exists)
+             - Is it about testing? → 'testing' label (if exists)
+             - Is it about CI/CD or workflows? → 'ci' or 'github-actions' label (if exists)
+             - Is it about dependencies? → 'dependencies' label (if exists)
+             - Is it a question? → 'question' label
+             - Is it a good first issue for newcomers? → 'good first issue' label
+             - Is it about UI/UX? → 'design' or 'ux' label (if exists)
+             - Is it about refactoring? → 'refactoring' label (if exists)
+             
+             For Pull Requests specifically:
+             - Does it fix a bug? → 'bug' label
+             - Does it add a feature? → 'enhancement' label
+             - Is it a breaking change? → 'breaking-change' label (if exists)
+             - Is it a minor fix? → 'minor' label (if exists)
+
+          4. FOURTH: Compare the labels that SHOULD be on this $ITEM_TYPE vs what's currently assigned:
+             - If current labels are correct and complete → do nothing, report 'Labels are already correct'
+             - If labels are missing → add the missing ones
+             - If labels are wrong/irrelevant → remove them and add correct ones
+             - Aim for 1-3 labels per item - don't over-label
+
+          5. FIFTH: Use the GitHub MCP Server to update the labels on $ITEM_TYPE #$ITEM_NUMBER:
+             - Add any missing labels that should be there
+             - Remove any labels that don't make sense for this item
+             - Keep labels that are correctly assigned
+
+          6. SIXTH (ONLY IF ABSOLUTELY NECESSARY): If there's a clear category that doesn't have a matching label:
+             - First, check if there's a similar label that could work
+             - Only create a new label if:
+               a) No existing label fits at all
+               b) This category will likely be used again in the future
+               c) The label name is clear and follows existing naming conventions
+             - Use appropriate colors (red for bugs, green for enhancements, blue for docs, etc.)
+             - This should be RARE - prefer using existing labels
+
+          IMPORTANT GUIDELINES:
+          - PRIORITIZE existing labels - don't create new ones unless truly needed
+          - Keep the label count reasonable (1-3 labels is ideal)
+          - Remove incorrect labels - it's better to have fewer correct labels than many wrong ones
+          - If the $ITEM_TYPE is well-labeled already, just report that and do nothing
+          - Be conservative - when in doubt, don't add a label
+
+          Report a summary at the end:
+          - Current labels (before your changes)
+          - Labels added
+          - Labels removed
+          - Labels created (if any - this should be rare!)
+          - Final labels on the $ITEM_TYPE
+          " --allow-all-tools --model gpt-5-mini
+
+          echo "✅ Smart labeling completed for $ITEM_TYPE #$ITEM_NUMBER"

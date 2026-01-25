@@ -1,14 +1,14 @@
 @if (hero) {
   <div class="hero-detail-container">
-    <h2>{{ hero.name | uppercase }} Details</h2>
-    <div class="detail-item"><span>id: </span>{{ hero.id }}</div>
+    <h2>🦸 {{ hero.name | uppercase }} Details</h2>
+    <div class="detail-item"><span>🆔 id: </span>{{ hero.id }}</div>
     <div>
-      <label for="hero-name">Hero name: </label>
+      <label for="hero-name">✏️ Hero name: </label>
       <input id="hero-name" [(ngModel)]="hero.name" placeholder="name" />
     </div>
     <div class="button-group">
-      <button class="back-button" (click)="goBack()">Go back</button>
-      <button class="save-button" (click)="save()">Save</button>
+      <button class="back-button" (click)="goBack()">⬅️ Go back</button>
+      <button class="save-button" (click)="save()">💾 Save</button>
     </div>
   </div>
 }

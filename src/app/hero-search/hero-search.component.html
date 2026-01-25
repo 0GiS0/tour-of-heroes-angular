@@ -1,13 +1,16 @@
 <div id="search-component">
-  <label for="search-box">Hero Search</label>
-  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+  <label for="search-box">🔍 Hero Search</label>
+  <input
+    #searchBox
+    id="search-box"
+    (input)="search(searchBox.value)"
+    placeholder="Search for a hero..."
+  />
 
   <ul class="search-result">
     @for (hero of heroes$ | async; track hero) {
       <li>
-        <a routerLink="/detail/{{ hero.id }}">
-          {{ hero.name }}
-        </a>
+        <a routerLink="/detail/{{ hero.id }}"> 🦸 {{ hero.name }} </a>
       </li>
     }
   </ul>

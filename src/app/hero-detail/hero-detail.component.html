@@ -1,14 +1,18 @@
-@if (hero) {
+<app-loading-spinner [loading]="loading" message="⏳ Cargando héroe..."></app-loading-spinner>
+
+@if (hero && !loading) {
   <div class="hero-detail-container">
     <h2>🦸 {{ hero.name | uppercase }} Details</h2>
     <div class="detail-item"><span>🆔 id: </span>{{ hero.id }}</div>
     <div>
       <label for="hero-name">✏️ Hero name: </label>
-      <input id="hero-name" [(ngModel)]="hero.name" placeholder="name" />
+      <input id="hero-name" [(ngModel)]="hero.name" placeholder="name" [disabled]="saving" />
     </div>
     <div class="button-group">
-      <button class="back-button" (click)="goBack()">⬅️ Go back</button>
-      <button class="save-button" (click)="save()">💾 Save</button>
+      <button class="back-button" (click)="goBack()" [disabled]="saving">⬅️ Go back</button>
+      <button class="save-button" (click)="save()" [disabled]="saving">
+        {{ saving ? '⏳ Saving...' : '💾 Save' }}
+      </button>
     </div>
   </div>
 }

@@ -12,6 +12,8 @@ import { HeroService } from '../hero.service';
 })
 export class HeroDetailComponent implements OnInit {
   @Input() hero?: Hero;
+  loading = false;
+  saving = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,8 +26,12 @@ export class HeroDetailComponent implements OnInit {
   }
 
   getHero(): void {
+    this.loading = true;
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.heroService.getHero(id).subscribe((hero) => (this.hero = hero));
+    this.heroService.getHero(id).subscribe((hero) => {
+      this.hero = hero;
+      this.loading = false;
+    });
   }
 
   goBack(): void {
@@ -34,7 +40,11 @@ export class HeroDetailComponent implements OnInit {
 
   save(): void {
     if (this.hero) {
-      this.heroService.updateHero(this.hero).subscribe(() => this.goBack());
+      this.saving = true;
+      this.heroService.updateHero(this.hero).subscribe(() => {
+        this.saving = false;
+        this.goBack();
+      });
     }
   }
 }

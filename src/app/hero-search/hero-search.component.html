@@ -7,7 +7,11 @@
     placeholder="Search for a hero..."
   />
 
-  <ul class="search-result">
+  <div class="searching-indicator" *ngIf="searching">
+    <span class="searching-spinner"></span> Buscando...
+  </div>
+
+  <ul class="search-result" *ngIf="!searching">
     @for (hero of heroes$ | async; track hero) {
       <li>
         <a routerLink="/detail/{{ hero.id }}"> 🦸 {{ hero.name }} </a>

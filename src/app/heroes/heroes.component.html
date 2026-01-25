@@ -1,12 +1,17 @@
 <h2>🦸‍♂️ My heroes</h2>
 <div class="add-hero-section">
   <label for="new-hero">✏️ Hero name: </label>
-  <input id="new-hero" #heroName placeholder="Enter hero name..." />
+  <input id="new-hero" #heroName placeholder="Enter hero name..." [disabled]="saving" />
 
   <!-- (click) passes input value to add() and the clears the input -->
-  <button class="add-button" (click)="add(heroName.value); heroName.value = ''">➕ Add hero</button>
+  <button class="add-button" (click)="add(heroName.value); heroName.value = ''" [disabled]="saving">
+    {{ saving ? '⏳ Saving...' : '➕ Add hero' }}
+  </button>
 </div>
-<ul class="heroes">
+
+<app-loading-spinner [loading]="loading" message="⏳ Cargando héroes..."></app-loading-spinner>
+
+<ul class="heroes" *ngIf="!loading">
   @for (hero of heroes; track hero) {
     <li>
       <a routerLink="/detail/{{ hero.id }}">
@@ -15,5 +20,7 @@
       </a>
       <button class="delete" title="delete hero" (click)="delete(hero)">🗑️</button>
     </li>
+  } @empty {
+    <li class="empty-state">😢 No hay héroes. ¡Añade uno!</li>
   }
 </ul>

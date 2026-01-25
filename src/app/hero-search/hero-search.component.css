@@ -1,48 +1,69 @@
 /* HeroSearch private styles */
 
+#search-component {
+  margin-top: 2rem;
+  background: var(--card-background);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
 label {
   display: block;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.2rem;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
 }
 
 input {
-  padding: 0.5rem;
+  padding: 12px 16px;
   width: 100%;
   max-width: 600px;
   box-sizing: border-box;
   display: block;
+  border: 2px solid #e0e0e0;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
 }
 
 input:focus {
-  outline: #336699 auto 1px;
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+ul.search-result {
+  margin-top: 1rem;
+  padding-left: 0;
+  max-width: 600px;
 }
 
 li {
   list-style-type: none;
 }
 
+.search-result li {
+  margin-bottom: 0.5rem;
+}
+
 .search-result li a {
-  border-bottom: 1px solid gray;
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
-  display: inline-block;
-  width: 100%;
-  max-width: 600px;
-  padding: 0.5rem;
+  display: block;
+  padding: 12px 16px;
   box-sizing: border-box;
   text-decoration: none;
-  color: black;
+  color: var(--text-primary);
+  background: var(--background);
+  border-radius: var(--border-radius-small);
+  transition: var(--transition);
+  font-weight: 600;
+  border-left: 3px solid var(--primary-color);
 }
 
 .search-result li a:hover {
-  background-color: #435a60;
+  background-color: var(--primary-color);
   color: white;
-}
-
-ul.search-result {
-  margin-top: 0;
-  padding-left: 0;
+  transform: translateX(4px);
+  box-shadow: var(--shadow);
 }

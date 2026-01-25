@@ -1,9 +1,9 @@
 @if (messageService.messages.length) {
-  <div>
-    <h2>Messages</h2>
-    <button class="clear" (click)="messageService.clear()">Clear messages</button>
+  <div class="messages-container">
+    <h2>💬 Messages</h2>
+    <button class="clear" (click)="messageService.clear()">🧹 Clear messages</button>
     @for (message of messageService.messages; track message) {
-      <div>{{ message }}</div>
+      <div class="message-item">ℹ️ {{ message }}</div>
     }
   </div>
 }

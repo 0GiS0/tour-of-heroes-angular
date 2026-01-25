@@ -1,18 +1,28 @@
 // See https://containers.dev/implementors/json_reference/ for configuration reference
 {
-  "name": "Tour of heroes - Angular",
+  "name": "🦸 Tour of Heroes - Angular Dev Environment",
   "dockerComposeFile": "docker-compose.yaml",
   "containerEnv": {},
   "service": "workspace",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "remoteUser": "node",
   "features": {
-    "ghcr.io/devcontainers-contrib/features/angular-cli:2": {}
+    "ghcr.io/devcontainers-extra/features/angular-cli:2": {}
   },
   "forwardPorts": [
-    4200, // Angular
-    5010 // Web API
+    4200,
+    5030
   ],
+  "portsAttributes": {
+    "4200": {
+      "label": "🅰️ Angular Frontend",
+      "onAutoForward": "notify"
+    },
+    "5030": {
+      "label": "🚀 Web API Backend",
+      "onAutoForward": "notify"
+    }
+  },
   "customizations": {
     "vscode": {
       "settings": {
@@ -30,7 +40,6 @@
           }
         ]
       },
-
       "extensions": [
         "ms-azuretools.vscode-docker",
         "ms-mssql.mssql",

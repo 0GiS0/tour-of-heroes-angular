@@ -2,78 +2,42 @@
   "categories": [
     {
       "title": "## 🚀 Features",
-      "labels": ["feature"]
+      "labels": ["✨ enhancement"]
     },
     {
-      "title": "## 🐛 Fixes",
-      "labels": ["fix"]
+      "title": "## 🐛 Bug Fixes",
+      "labels": ["🐛 bug", "🔧 fix"]
     },
     {
-      "title": "## 🧪 Tests",
-      "labels": ["test"]
+      "title": "## 🅰️ Angular",
+      "labels": ["🅰️ angular"]
     },
     {
-      "title": "## 🖇 Dependencies",
-      "labels": ["dependencies"]
+      "title": "## 📦 Dependencies",
+      "labels": ["📦 dependencies", "dependencies"]
     },
     {
-      "title": "## 🧪 Tests and some 🪄 Magic",
-      "labels": ["test", "magic"],
-      "exclude_labels": ["no-magic"],
-      "exhaustive": true,
-      "exhaustive_rules": "false",
-      "empty_content": "- no matching PRs",
-      "rules": [
-        {
-          "pattern": "open",
-          "on_property": "status",
-          "flags": "gu"
-        }
-      ]
+      "title": "## ⚙️ CI/CD",
+      "labels": ["⚙️ github actions", "github_actions"]
+    },
+    {
+      "title": "## 📚 Documentation",
+      "labels": ["📚 documentation"]
     }
   ],
-  "ignore_labels": ["ignore"],
+  "ignore_labels": ["🔁 duplicate", "🙅 wontfix", "🚫 invalid"],
   "sort": {
-    "order": "ASC",
+    "order": "DESC",
     "on_property": "mergedAt"
   },
-  "template": "${{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n${{UNCATEGORIZED}}\n</details>",
-  "pr_template": "- ${{TITLE}}\n   - PR: #${{NUMBER}}",
-  "empty_template": "- no changes",
-  "label_extractor": [
-    {
-      "pattern": "(.) (.+)",
-      "target": "$1",
-      "flags": "gu"
-    },
-    {
-      "pattern": "\\[Issue\\]",
-      "on_property": "title",
-      "method": "match"
-    }
-  ],
-  "duplicate_filter": {
-    "pattern": "\\[ABC-....\\]",
-    "on_property": "title",
-    "method": "match"
-  },
-  "transformers": [
-    {
-      "pattern": "[\\-\\*] (\\[(...|TEST|CI|SKIP)\\])( )?(.+?)\n(.+?[\\-\\*] )(.+)",
-      "target": "- $4\n  - $6"
-    }
-  ],
-  "trim_values": false,
+  "template": "# What's Changed\n\n${{CHANGELOG}}\n\n${{UNCATEGORIZED}}",
+  "pr_template": "- ${{TITLE}} by @${{AUTHOR}} in #${{NUMBER}}",
+  "empty_template": "- No changes",
   "max_tags_to_fetch": 200,
   "max_pull_requests": 200,
   "max_back_track_time_days": 365,
-  "exclude_merge_branches": ["Owner/qa"],
   "tag_resolver": {
-    "method": "semver",
-    "filter": {
-      "pattern": "api-(.+)",
-      "flags": "gu"
-    }
+    "method": "semver"
   },
-  "base_branches": ["dev"]
+  "base_branches": ["main"]
 }

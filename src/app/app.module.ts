@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
@@ -18,6 +19,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 // import { InMemoryDataService } from './in-memory-data.service';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { ApiStatusBadgeComponent } from './api-status-badge/api-status-badge.component';
 
 @NgModule({
   declarations: [
@@ -28,9 +30,10 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     DashboardComponent,
     HeroSearchComponent,
     LoadingSpinnerComponent,
+    ApiStatusBadgeComponent,
   ],
   bootstrap: [AppComponent],
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  imports: [BrowserModule, CommonModule, FormsModule, AppRoutingModule],
   providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 export class AppModule {}

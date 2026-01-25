@@ -1,0 +1,133 @@
+.api-badge {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: 1px solid #0f3460;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  min-width: 80px;
+}
+
+.api-badge:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.api-badge.expanded {
+  min-width: 200px;
+}
+
+.badge-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #e0e0e0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-icon {
+  font-size: 10px;
+  animation: none;
+}
+
+.api-badge:not(.expanded) .status-icon {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.api-label {
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.version {
+  color: #22d3ee;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.badge-details {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #0f3460;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 11px;
+}
+
+.detail-row .label {
+  color: #94a3b8;
+}
+
+.detail-row .value {
+  color: #e0e0e0;
+  font-weight: 500;
+}
+
+.detail-row .value.healthy {
+  color: #22c55e;
+}
+
+.detail-row .value.unhealthy {
+  color: #ef4444;
+}
+
+.detail-row .value.env {
+  color: #a78bfa;
+  font-weight: 600;
+}
+
+.detail-row .value.env.prod {
+  color: #f97316;
+}
+
+.detail-row .value.url {
+  font-size: 10px;
+  word-break: break-all;
+  max-width: 150px;
+  text-align: right;
+}
+
+.refresh-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: #0f3460;
+  border: 1px solid #1e4976;
+  border-radius: 4px;
+  color: #e0e0e0;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.refresh-btn:hover {
+  background: #1e4976;
+  border-color: #2d5a8a;
+}
+
+.refresh-btn:active {
+  transform: scale(0.98);
+}

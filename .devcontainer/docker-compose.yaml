@@ -7,8 +7,10 @@ services:
     volumes:
       - ../..:/workspaces:cached
     environment:      
-      API_URL: https://${CODESPACE_NAME}-5010.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}/api/hero
+      API_URL: http://localhost:5011/api/hero
     command: sleep infinity
+    networks:
+      - heroes-network
   api:
     depends_on:
       - db
@@ -18,13 +20,17 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db,1433;Initial Catalog=heroes;Persist Security Info=False;User ID=sa;Password=P@ssword;TrustServerCertificate=True;
     ports:
-      - "5010:5000"
+      - "5011:5000"
+    networks:
+      - heroes-network
   db:    
     image:  mcr.microsoft.com/azure-sql-edge
     restart: unless-stopped
     environment:
       SA_PASSWORD: P@ssword
       ACCEPT_EULA: Y
+    networks:
+      - heroes-network
   init-db:
     image: mcr.microsoft.com/azure-sql-edge
     command: >      
@@ -43,3 +49,9 @@ services:
       SA_PASSWORD: P@ssword
       ACCEPT_EULA: Y
     restart: on-failure
+    networks:
+      - heroes-network
+
+networks:
+  heroes-network:
+    driver: bridge

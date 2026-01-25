@@ -11,16 +11,16 @@ pool:
 
 steps:
   - script: echo Hello, world!
-    displayName: "Run a one-line script"
+    displayName: 'Run a one-line script'
 
   - task: NodeTool@0
     inputs:
-      versionSource: "spec"
-      versionSpec: "18.x"
+      versionSource: 'spec'
+      versionSpec: '18.x'
 
   - task: Npm@1
     inputs:
-      command: "install"
+      command: 'install'
 
   # Generate SBOM - https://github.com/microsoft/sbom-tool/blob/main/docs/setting-up-ado-pipelines.md
   - script: |
@@ -32,6 +32,6 @@ steps:
   #Upload SBOM to Build Artifacts
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
-      ArtifactName: "drop"
-      publishLocation: "Container"
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'

@@ -21,7 +21,7 @@ export class HeroService {
 
   constructor(
     private messageService: MessageService,
-    private http: HttpClient,
+    private http: HttpClient
   ) {}
 
   private log(message: string) {
@@ -35,7 +35,7 @@ export class HeroService {
 
     return this.http.get<Hero[]>(this.heroesUrl).pipe(
       tap((_) => this.log('fetched heroes')),
-      catchError(this.handleError<Hero[]>('getHeroes', [])),
+      catchError(this.handleError<Hero[]>('getHeroes', []))
     );
   }
 
@@ -48,7 +48,7 @@ export class HeroService {
     const url = `${this.heroesUrl}/${id}`;
     return this.http.get<Hero>(url).pipe(
       tap((_) => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Hero>(`getHero id=${id}`)),
+      catchError(this.handleError<Hero>(`getHero id=${id}`))
     );
   }
 
@@ -59,7 +59,7 @@ export class HeroService {
 
     return this.http.put(url, hero, this.httpOptions).pipe(
       tap((_) => this.log(`updated hero id=${hero.id}`)),
-      catchError(this.handleError<any>('updateHero')),
+      catchError(this.handleError<any>('updateHero'))
     );
   }
 
@@ -67,7 +67,7 @@ export class HeroService {
   addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
       tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
-      catchError(this.handleError<Hero>('addHero')),
+      catchError(this.handleError<Hero>('addHero'))
     );
   }
 
@@ -77,7 +77,7 @@ export class HeroService {
 
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
       tap((_) => this.log(`delete hero id=${id}`)),
-      catchError(this.handleError<Hero>('deleteHero')),
+      catchError(this.handleError<Hero>('deleteHero'))
     );
   }
 
@@ -91,9 +91,9 @@ export class HeroService {
       tap((x) =>
         x.length
           ? this.log(`found heroes matching "${term}"`)
-          : this.log(`no heroes matching "${term}"`),
+          : this.log(`no heroes matching "${term}"`)
       ),
-      catchError(this.handleError<Hero[]>('searchHeroes', [])),
+      catchError(this.handleError<Hero[]>('searchHeroes', []))
     );
   }
 

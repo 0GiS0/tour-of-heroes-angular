@@ -2,47 +2,75 @@
 
 h2 {
   text-align: center;
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 2rem;
 }
 
 .heroes-menu {
   padding: 0;
-  margin: auto;
-  max-width: 1000px;
-  /* flexbox */
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: flex-start;
-  align-items: flex-start;
+  margin: 2rem auto;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
 }
 
+/* Hero Card Styles */
 a {
-  background-color: #3f525c;
-  border-radius: 2px;
-  padding: 1rem;
-  font-size: 1.2rem;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  border-radius: var(--border-radius);
+  padding: 2rem 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #fff;
   text-align: center;
-  width: 100%;
-  min-width: 70px;
-  margin: 0.5rem auto;
-  box-sizing: border-box;
-  /* flexbox */
-  order: 0;
-  flex: 0 1 auto;
-  align-self: auto;
+  min-height: 120px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
 }
 
-@media (min-width: 600px) {
-  a {
-    width: 18%;
-    box-sizing: content-box;
-  }
+a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: var(--transition);
 }
 
 a:hover {
-  background-color: #000;
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-large);
+}
+
+a:hover::before {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .heroes-menu {
+    grid-template-columns: 1fr;
+  }
+
+  a {
+    min-height: 80px;
+    padding: 1.5rem 1rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 960px) {
+  .heroes-menu {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

@@ -1,12 +1,12 @@
-version: '3.7'
+version: "3.7"
 services:
   workspace:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - ../..:/workspaces:cached
-    environment:      
+    environment:
       API_URL: http://api:5000/api/hero
     command: sleep infinity
     networks:
@@ -15,7 +15,7 @@ services:
     depends_on:
       - db
       - init-db
-    image: ghcr.io/0gis0/tour-of-heroes-dotnet-api/tour-of-heroes-api:6b947c4
+    image: ghcr.io/0gis0/tour-of-heroes-dotnet-api/tour-of-heroes-api:9a0bdcc
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db,1433;Initial Catalog=heroes;Persist Security Info=False;User ID=sa;Password=P@ssword;TrustServerCertificate=True;
@@ -23,8 +23,8 @@ services:
       - "5011:5000"
     networks:
       - heroes-network
-  db:    
-    image:  mcr.microsoft.com/azure-sql-edge
+  db:
+    image: mcr.microsoft.com/azure-sql-edge
     restart: unless-stopped
     environment:
       SA_PASSWORD: P@ssword
@@ -33,16 +33,16 @@ services:
       - heroes-network
   init-db:
     image: mcr.microsoft.com/azure-sql-edge
-    command: >      
-        /bin/bash -c "
-          while ! /opt/mssql-tools/bin/sqlcmd -S db -U sa -P 'P@ssword' -Q 'SELECT * FROM sys.databases' > /dev/null 2>&1; do
-            echo 'Waiting for SQL Server to become available...'
-            sleep 1
-          done;
-          echo 'SQL Server is now available.'
-          
-          /opt/mssql-tools/bin/sqlcmd -S db -U sa -P 'P@ssword' -i /tmp/db-init.sql;
-        "
+    command: >
+      /bin/bash -c "
+        while ! /opt/mssql-tools/bin/sqlcmd -S db -U sa -P 'P@ssword' -Q 'SELECT * FROM sys.databases' > /dev/null 2>&1; do
+          echo 'Waiting for SQL Server to become available...'
+          sleep 1
+        done;
+        echo 'SQL Server is now available.'
+        
+        /opt/mssql-tools/bin/sqlcmd -S db -U sa -P 'P@ssword' -i /tmp/db-init.sql;
+      "
     volumes:
       - ./db-init.sql:/tmp/db-init.sql
     environment:

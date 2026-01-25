@@ -146,6 +146,13 @@ jobs:
           2. README with screenshots - The README should showcase the app with real screenshots
           3. Look & Feel improvements - Based on your Playwright analysis of the running app
 
+          ⚠️ QUALITY OVER QUANTITY ⚠️
+          - Only create discussions for suggestions that provide REAL VALUE to the project
+          - Do NOT create discussions just to create something - if the codebase is already in good shape, it's OK to create zero discussions
+          - Skip minor nitpicks, trivial improvements, or changes that don't significantly impact the project
+          - A suggestion is worth a discussion ONLY if it fixes a real problem, improves security, significantly enhances UX, or adds important missing functionality
+          - If you don't find any meaningful suggestions, simply report that the codebase is in good condition and no discussions were created
+
           Create individual discussions for each important suggestion, not a single discussion with everything.
           Use the GitHub MCP Server's create_discussion tool to create each discussion in the 'Ideas' category.
           REMEMBER: Skip any suggestion that already has a related issue in the repository!

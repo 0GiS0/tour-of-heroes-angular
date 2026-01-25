@@ -1,10 +1,17 @@
 <h2>🏆 Top Heroes</h2>
-<div class="heroes-menu">
-  @for (hero of heroes; track hero) {
-    <a routerLink="/detail/{{ hero.id }}">
-      <span class="hero-icon">🦸</span>
-      {{ hero.name }}
-    </a>
-  }
-</div>
+
+<app-loading-spinner [loading]="loading" message="⏳ Cargando héroes..."></app-loading-spinner>
+
+@if (!loading) {
+  <div class="heroes-menu">
+    @for (hero of heroes; track hero) {
+      <a routerLink="/detail/{{ hero.id }}">
+        <span class="hero-icon">🦸</span>
+        {{ hero.name }}
+      </a>
+    } @empty {
+      <p class="empty-state">😢 No hay héroes disponibles</p>
+    }
+  </div>
+}
 <app-hero-search></app-hero-search>

@@ -7,11 +7,17 @@
     placeholder="Search for a hero..."
   />
 
-  <ul class="search-result">
-    @for (hero of heroes$ | async; track hero) {
-      <li>
-        <a routerLink="/detail/{{ hero.id }}"> 🦸 {{ hero.name }} </a>
-      </li>
-    }
-  </ul>
+  @if (searching) {
+    <div class="searching-indicator"><span class="searching-spinner"></span> Buscando...</div>
+  }
+
+  @if (!searching) {
+    <ul class="search-result">
+      @for (hero of heroes$ | async; track hero) {
+        <li>
+          <a routerLink="/detail/{{ hero.id }}"> 🦸 {{ hero.name }} </a>
+        </li>
+      }
+    </ul>
+  }
 </div>

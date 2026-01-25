@@ -154,3 +154,13 @@ button.delete:hover {
     font-size: 0.9rem;
   }
 }
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  padding: 2rem;
+  background: var(--background);
+  border-radius: var(--border-radius);
+}

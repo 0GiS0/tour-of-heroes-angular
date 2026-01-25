@@ -82,3 +82,12 @@ a:hover::before {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  padding: 2rem;
+  grid-column: 1 / -1;
+}

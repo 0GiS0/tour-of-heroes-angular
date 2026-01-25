@@ -11,6 +11,8 @@ import { MessageService } from '../message.service';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
+  loading = false;
+  saving = false;
 
   constructor(
     private heroService: HeroService,
@@ -21,7 +23,11 @@ export class HeroesComponent implements OnInit {
     this.getHeroes();
   }
   getHeroes(): void {
-    this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
+    this.loading = true;
+    this.heroService.getHeroes().subscribe((heroes) => {
+      this.heroes = heroes;
+      this.loading = false;
+    });
   }
 
   add(Name: string): void {
@@ -29,8 +35,10 @@ export class HeroesComponent implements OnInit {
     if (!Name) {
       return;
     }
+    this.saving = true;
     this.heroService.addHero({ name: Name } as Hero).subscribe((hero) => {
       this.heroes.push(hero);
+      this.saving = false;
     });
   }
 

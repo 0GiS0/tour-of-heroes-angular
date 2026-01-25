@@ -1,0 +1,39 @@
+<div class="api-badge" [class.expanded]="isExpanded" (click)="toggleExpanded()">
+  <div class="badge-header">
+    <span class="status-icon">{{ getStatusIcon() }}</span>
+    <span class="api-label">{{ apiName || 'API' }}</span>
+    @if (apiVersion && apiVersion !== 'N/A') {
+      <span class="version">v{{ apiVersion }}</span>
+    }
+    <span class="header-url">{{ getDisplayUrl() }}</span>
+  </div>
+  @if (isExpanded) {
+    <div class="badge-details">
+      <div class="detail-row">
+        <span class="label">Status:</span>
+        <span
+          class="value"
+          [class.healthy]="isApiHealthy"
+          [class.unhealthy]="isApiHealthy === false"
+        >
+          {{ apiStatus || getStatusText() }}
+        </span>
+      </div>
+      @if (apiEnvironment && apiEnvironment !== 'N/A') {
+        <div class="detail-row">
+          <span class="label">Environment:</span>
+          <span class="value env" [class.prod]="apiEnvironment === 'Production'">{{
+            apiEnvironment
+          }}</span>
+        </div>
+      }
+      <div class="detail-row">
+        <span class="label">URL:</span>
+        <span class="value url">{{ getDisplayUrl() }}</span>
+      </div>
+      <button class="refresh-btn" (click)="checkApiHealth(); $event.stopPropagation()">
+        🔄 Refresh
+      </button>
+    </div>
+  }
+</div>

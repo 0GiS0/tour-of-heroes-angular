@@ -25,7 +25,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'angular-tour-of-heroes app is running!',
+      'angular-tour-of-heroes app is running!'
     );
   });
 });

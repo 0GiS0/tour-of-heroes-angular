@@ -5,15 +5,90 @@
 
 version: 2
 updates:
-  - package-ecosystem: 'npm' # See documentation for possible values
-    directory: '/' # Location of package manifests
+  # NPM dependencies
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
       interval: 'weekly'
-  - package-ecosystem: 'devcontainers' # See documentation for possible values
-    directory: '/' # Location of package manifests
+      day: 'monday'
+      time: '09:00'
+      timezone: 'Europe/Madrid'
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: 'chore(deps)'
+      prefix-development: 'chore(deps-dev)'
+    labels:
+      - '📦 dependencies'
+      - '🟨 javascript'
+    groups:
+      angular:
+        patterns:
+          - '@angular*'
+        update-types:
+          - 'minor'
+          - 'patch'
+        labels:
+          - '📦 dependencies'
+          - '🅰️ angular'
+      angular-eslint:
+        patterns:
+          - '@angular-eslint*'
+      typescript-eslint:
+        patterns:
+          - '@typescript-eslint*'
+      testing:
+        patterns:
+          - 'jasmine*'
+          - 'karma*'
+          - '@types/jasmine'
+      types:
+        patterns:
+          - '@types/*'
+        exclude-patterns:
+          - '@types/jasmine'
+
+  # Dev Containers
+  - package-ecosystem: 'devcontainers'
+    directory: '/'
     schedule:
       interval: 'weekly'
-  - package-ecosystem: 'github-actions' # See documentation for possible values
-    directory: '/' # Location of package manifests
+      day: 'monday'
+      time: '09:00'
+      timezone: 'Europe/Madrid'
+    commit-message:
+      prefix: 'chore(devcontainer)'
+    labels:
+      - '📦 dependencies'
+      - '�️ devcontainer'
+
+  # GitHub Actions
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
       interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+      timezone: 'Europe/Madrid'
+    commit-message:
+      prefix: 'ci'
+    labels:
+      - '📦 dependencies'
+      - '⚙️ github actions'
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+
+  # Docker
+  - package-ecosystem: 'docker'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+      timezone: 'Europe/Madrid'
+    commit-message:
+      prefix: 'chore(docker)'
+    labels:
+      - '📦 dependencies'
+      - '🐳 docker'

@@ -110,6 +110,30 @@ For development with `npm start`, edit `src/assets/env.js` directly:
 window['env'] = { ApiUrl: 'http://localhost:5010/api/hero' };
 ```
 
+## Seeding the Database with Heroes
+
+If the database is empty, you can add heroes using:
+
+**Option 1: SQL directly** (see `.devcontainer/db-init.sql` for schema):
+
+```sql
+INSERT INTO Heroes (Id, Name, AlterEgo, Description) VALUES
+(1, 'Batman', 'Bruce Wayne', 'A wealthy American playboy and owner of Wayne Enterprises.'),
+(2, 'Superman', 'Clark Kent', 'A superhero born on Krypton with the name Kal-El.'),
+(3, 'Wonder Woman', 'Diana Prince', 'A demigoddess and warrior princess of the Amazons.');
+```
+
+**Option 2: Via API POST** (using curl or the app):
+
+```bash
+# Add a hero via API
+curl -X POST http://localhost:5010/api/hero \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Batman", "alterEgo": "Bruce Wayne", "description": "The Dark Knight"}'
+```
+
+**Option 3: Use the app** - Navigate to `/heroes` and use the "Add" input to create heroes through the UI.
+
 ## File Structure
 
 ```

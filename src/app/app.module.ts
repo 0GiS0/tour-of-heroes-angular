@@ -11,7 +11,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 //In memory web api
 // import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -27,14 +27,8 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
     DashboardComponent,
     HeroSearchComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    // HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false })
-  ],
-  providers: [],
   bootstrap: [AppComponent],
+  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 export class AppModule {}

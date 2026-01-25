@@ -3,7 +3,7 @@ on:
   workflow_call:
 
 env:
-  NODE_VERSION: 18.x
+  NODE_VERSION: 22.x
 
 jobs:
   # Confirm that prettier was run on the changes

@@ -10,7 +10,8 @@
     "test": "ng test",
     "prettier-check": "prettier --check \"./**/*.{md,jsx,json,html,css,js,yml,ts,tsx}\"",
     "prettier-format": "prettier --write \"./**/*.{md,jsx,json,html,css,js,yml,ts,tsx}\"",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
@@ -41,13 +42,18 @@
     "@typescript-eslint/parser": "^5.62.0",
     "envsub": "^4.1.0",
     "eslint": "^8.56.0",
+    "husky": "^9.1.7",
     "jasmine-core": "~5.1.2",
     "karma": "~6.4.2",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^16.2.7",
     "prettier-check": "^2.0.0",
     "typescript": "~5.9.3"
+  },
+  "lint-staged": {
+    "*.{md,jsx,json,html,css,js,yml,ts,tsx}": "prettier --write"
   }
 }

@@ -2,7 +2,9 @@
 {
   "name": "🦸 Tour of Heroes - Angular Dev Environment",
   "dockerComposeFile": "docker-compose.yaml",
-  "containerEnv": {},
+  "containerEnv": {
+    "API_URL": "http://localhost:5011/api/hero"
+  },
   "service": "workspace",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "remoteUser": "node",

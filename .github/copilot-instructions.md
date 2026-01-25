@@ -37,6 +37,24 @@ npm test           # Karma + Jasmine tests
 npm run prettier-format  # Format all files
 ```
 
+## ⚠️ CRITICAL: Pre-commit Hooks (Coding Agent MUST READ)
+
+This project uses **Husky + lint-staged** for pre-commit hooks. The CI will fail if files are not properly formatted.
+
+**Before ANY commit, you MUST run:**
+
+```bash
+npm run prettier-format
+```
+
+Or manually trigger the pre-commit hook:
+
+```bash
+npx lint-staged
+```
+
+**Why?** Husky hooks don't run automatically when committing via GitHub API or Coding Agent. The `prettier-check` CI job will fail if files aren't formatted.
+
 ## Important Conventions
 
 ### Code Style

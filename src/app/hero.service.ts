@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class HeroService {
   // private heroesUrl = 'api/heroes';
-  private heroesUrl = environment.apiUrl; //URL to the web api
+  private heroesUrl = this.normalizeApiUrl(environment.apiUrl); //URL to the web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -23,6 +23,23 @@ export class HeroService {
     private messageService: MessageService,
     private http: HttpClient
   ) {}
+
+  /**
+   * Normalize the API URL to ensure it ends with /api/hero
+   * Handles cases where the URL might be just the base URL without the path
+   */
+  private normalizeApiUrl(url: string): string {
+    // If URL already ends with /api/hero, return as-is
+    if (url.endsWith('/api/hero') || url.endsWith('/api/hero/')) {
+      return url.replace(/\/$/, ''); // Remove trailing slash if present
+    }
+    // If URL ends with just /api, append /hero
+    if (url.endsWith('/api') || url.endsWith('/api/')) {
+      return url.replace(/\/$/, '') + '/hero';
+    }
+    // Otherwise, append /api/hero
+    return url.replace(/\/$/, '') + '/api/hero';
+  }
 
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);

@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
     inputs:
       suggestion_type:
-        description: "Type of suggestions to look for"
+        description: 'Type of suggestions to look for'
         required: true
-        default: "all"
+        default: 'all'
         type: choice
         options:
           - all

@@ -69,7 +69,14 @@ jobs:
 
           3. THIRD: Analyze all the code in this repository looking for improvements in: $CATEGORIES
 
-          4. FOURTH: For each important suggestion found, create a DISCUSSION (not an issue) in this repository.
+          4. FOURTH: Before creating any discussion, use the GitHub MCP Server to search for existing ISSUES 
+             in this repository that might be related to each suggestion.
+             - Search issues using relevant keywords from your suggestion
+             - Check both open AND closed issues
+             - If an issue already exists that covers the same topic/improvement, DO NOT create a discussion for it
+             - Only proceed to create a discussion if NO related issue exists
+
+          5. FIFTH: For each important suggestion that has NO related existing issue, create a DISCUSSION in this repository.
              CRITICAL REQUIREMENTS for each discussion:
              - Category: Use the 'Ideas' category (or equivalent found in step 1)
              - Title: Follow EXACTLY the same style as existing discussions
@@ -80,6 +87,7 @@ jobs:
 
           Create individual discussions for each important suggestion, not a single discussion with everything.
           Use the GitHub MCP Server's create_discussion tool to create each discussion in the 'Ideas' category.
+          REMEMBER: Skip any suggestion that already has a related issue in the repository!
           " --allow-all-tools
 
           echo "✅ Copilot CLI analysis completed"

@@ -7,7 +7,7 @@ services:
     volumes:
       - ../..:/workspaces:cached
     environment:      
-      API_URL: http://localhost:5011/api/hero
+      API_URL: http://api:5000/api/hero
     command: sleep infinity
     networks:
       - heroes-network

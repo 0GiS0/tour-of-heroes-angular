@@ -14,12 +14,13 @@ jobs:
       SERVER_TOKEN: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4.0.3
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Install Angular CLI
         run: npm install -g @angular/cli
       - name: Run ESLint
         run: |
-          npm install --force       
+          npm ci
           npm run lint
+

@@ -11,16 +11,18 @@
 
 <app-loading-spinner [loading]="loading" message="⏳ Cargando héroes..."></app-loading-spinner>
 
-<ul class="heroes" *ngIf="!loading">
-  @for (hero of heroes; track hero) {
-    <li>
-      <a routerLink="/detail/{{ hero.id }}">
-        <span class="badge">{{ hero.id }}</span> {{ hero.name }}
-        <!-- Interpolated content is always escaped -->
-      </a>
-      <button class="delete" title="delete hero" (click)="delete(hero)">🗑️</button>
-    </li>
-  } @empty {
-    <li class="empty-state">😢 No hay héroes. ¡Añade uno!</li>
-  }
-</ul>
+@if (!loading) {
+  <ul class="heroes">
+    @for (hero of heroes; track hero) {
+      <li>
+        <a routerLink="/detail/{{ hero.id }}">
+          <span class="badge">{{ hero.id }}</span> {{ hero.name }}
+          <!-- Interpolated content is always escaped -->
+        </a>
+        <button class="delete" title="delete hero" (click)="delete(hero)">🗑️</button>
+      </li>
+    } @empty {
+      <li class="empty-state">😢 No hay héroes. ¡Añade uno!</li>
+    }
+  </ul>
+}

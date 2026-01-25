@@ -2,14 +2,16 @@
 
 <app-loading-spinner [loading]="loading" message="⏳ Cargando héroes..."></app-loading-spinner>
 
-<div class="heroes-menu" *ngIf="!loading">
-  @for (hero of heroes; track hero) {
-    <a routerLink="/detail/{{ hero.id }}">
-      <span class="hero-icon">🦸</span>
-      {{ hero.name }}
-    </a>
-  } @empty {
-    <p class="empty-state">😢 No hay héroes disponibles</p>
-  }
-</div>
+@if (!loading) {
+  <div class="heroes-menu">
+    @for (hero of heroes; track hero) {
+      <a routerLink="/detail/{{ hero.id }}">
+        <span class="hero-icon">🦸</span>
+        {{ hero.name }}
+      </a>
+    } @empty {
+      <p class="empty-state">😢 No hay héroes disponibles</p>
+    }
+  </div>
+}
 <app-hero-search></app-hero-search>

@@ -1,14 +1,15 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-loading-spinner',
   standalone: false,
   template: `
-    <div class="spinner-container" *ngIf="loading">
-      <div class="spinner"></div>
-      <p class="loading-text">{{ message }}</p>
-    </div>
+    @if (loading) {
+      <div class="spinner-container">
+        <div class="spinner"></div>
+        <p class="loading-text">{{ message }}</p>
+      </div>
+    }
   `,
   styles: [
     `
